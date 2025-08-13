@@ -6,7 +6,11 @@
 
 ```
 dotfiles/
-├── git/               # Git設定
+├── alacritty/        # Alacrittyターミナル設定
+│   ├── alacritty.toml
+│   └── themes/       # カラーテーマ
+│       └── dracula.toml
+├── git/              # Git設定
 │   ├── .gitconfig
 │   └── .gitignore_global
 ├── tmux/             # Tmux設定
@@ -92,16 +96,22 @@ chmod +x uninstall.sh
 - `tmux-sensible`: 基本設定
 - `tmux-pain-control`: ペイン操作の改善
 
+#### Alacritty
+- Draculaテーマ: ダークテーマのカラースキーム
+- 他のテーマも`alacritty/themes/`に追加可能
+
 ## 必要な依存関係
 
 - Homebrew
 - Zsh
 - Git
 - Tmux
+- Alacritty (ターミナルエミュレータ)
 - Starship (プロンプト)
 - fzf
 - nodenv
 - pyenv
+- Hack Nerd Font (Alacritty用フォント)
 
 ## セキュリティ注意事項
 

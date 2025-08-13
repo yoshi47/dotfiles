@@ -83,6 +83,18 @@ if [ -f "$DOTFILES_DIR/starship/starship.toml" ]; then
     create_symlink "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 fi
 
+# Alacritty configuration
+if [ -f "$DOTFILES_DIR/alacritty/alacritty.toml" ]; then
+    print_info "Setting up Alacritty configuration..."
+    mkdir -p "$HOME/.config/alacritty/themes"
+    create_symlink "$DOTFILES_DIR/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
+    
+    # Link theme files
+    if [ -f "$DOTFILES_DIR/alacritty/themes/dracula.toml" ]; then
+        create_symlink "$DOTFILES_DIR/alacritty/themes/dracula.toml" "$HOME/.config/alacritty/themes/dracula.toml"
+    fi
+fi
+
 # Create .env.local from example if it doesn't exist
 if [ ! -f "$HOME/.env.local" ]; then
     print_info "Creating .env.local from template..."

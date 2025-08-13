@@ -66,5 +66,16 @@ if [ -L "$HOME/.config/starship.toml" ]; then
     remove_symlink "$HOME/.config/starship.toml"
 fi
 
+# Remove Alacritty configuration
+if [ -L "$HOME/.config/alacritty/alacritty.toml" ]; then
+    print_info "Removing Alacritty configuration..."
+    remove_symlink "$HOME/.config/alacritty/alacritty.toml"
+    
+    # Remove theme symlinks
+    if [ -L "$HOME/.config/alacritty/themes/dracula.toml" ]; then
+        remove_symlink "$HOME/.config/alacritty/themes/dracula.toml"
+    fi
+fi
+
 print_info "Dotfiles uninstallation completed!"
 print_warning "Note: .env.local was not removed for security reasons"
