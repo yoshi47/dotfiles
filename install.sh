@@ -71,6 +71,27 @@ create_symlink "$DOTFILES_DIR/git/.gitignore_global" "$HOME/.gitignore_global"
 print_info "Setting up Tmux configuration..."
 create_symlink "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
 
+# Install Tmux Plugin Manager (TPM) if not exists
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    print_info "Installing Tmux Plugin Manager (TPM)..."
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+    
+    # Install tmux plugins automatically
+    print_info "Installing tmux plugins..."
+    # Start a tmux server but don't attach to it
+    tmux start-server
+    # Create a new session but don't attach to it
+    tmux new-session -d -s temp_session
+    # Install plugins
+    "$HOME/.tmux/plugins/tpm/scripts/install_plugins.sh"
+    # Kill the temp session
+    tmux kill-session -t temp_session
+    print_info "Tmux plugins installed successfully!"
+else
+    print_info "TPM already installed, updating plugins..."
+    "$HOME/.tmux/plugins/tpm/scripts/update_plugin.sh" all
+fi
+
 # Vim configuration (if exists)
 if [ -d "$DOTFILES_DIR/vim" ]; then
     print_info "Setting up Vim configuration..."

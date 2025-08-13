@@ -43,6 +43,8 @@ chmod +x install.sh
 これにより以下の処理が実行されます：
 - 設定ファイルのシンボリックリンクをホームディレクトリに作成
 - 既存のファイルは `.backup` として保存
+- TPM（Tmux Plugin Manager）を自動インストール
+- tmuxプラグインを自動インストール
 - `.env.example` から `.env.local` を作成
 
 ### 3. 環境変数の設定
@@ -91,10 +93,13 @@ chmod +x uninstall.sh
 - `zsh-syntax-highlighting`: シンタックスハイライト
 
 #### Tmux
-- `tpm`: Tmuxプラグインマネージャー
-- `dracula/tmux`: Draculaテーマ
-- `tmux-sensible`: 基本設定
-- `tmux-pain-control`: ペイン操作の改善
+- `tpm`: Tmuxプラグインマネージャー（自動インストール）
+- `dracula/tmux`: Draculaテーマ（自動インストール）
+- `tmux-sensible`: 基本設定（自動インストール）
+- `tmux-pain-control`: ペイン操作の改善（自動インストール）
+- `tmux-copycat`: 検索機能の拡張（自動インストール）
+
+**注意**: 初回インストール時に自動でプラグインがインストールされます。手動でインストールする場合は、tmux内で `prefix + I` (デフォルト: `Ctrl-j + I`) を押してください。
 
 #### Alacritty
 - Draculaテーマ: ダークテーマのカラースキーム
