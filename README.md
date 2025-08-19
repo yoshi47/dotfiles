@@ -10,6 +10,14 @@ dotfiles/
 │   ├── alacritty.toml
 │   └── themes/       # カラーテーマ
 │       └── dracula.toml
+├── claude/           # Claude Code設定
+│   ├── settings.json # 統合設定ファイル
+│   ├── CLAUDE.md     # ユーザー指示
+│   └── hooks/        # フックスクリプト
+│       ├── hook_fetch.sh
+│       ├── hook_pre_commands.sh
+│       ├── hook_stop_words.sh
+│       └── rules/
 ├── git/              # Git設定
 │   ├── .gitconfig
 │   └── .gitignore_global
@@ -45,6 +53,7 @@ chmod +x install.sh
 - 既存のファイルは `.backup` として保存
 - TPM（Tmux Plugin Manager）を自動インストール
 - tmuxプラグインを自動インストール
+- Claude Code設定を `~/.claude` にシンボリックリンク作成
 - `.env.example` から `.env.local` を作成
 
 ### 3. 環境変数の設定
@@ -104,6 +113,23 @@ chmod +x uninstall.sh
 #### Alacritty
 - Draculaテーマ: ダークテーマのカラースキーム
 - 他のテーマも`alacritty/themes/`に追加可能
+
+### Claude Code設定
+
+#### 設定ファイル
+- `claude/settings.json`: 統合設定ファイル（全プロジェクトの権限、フック、モデル設定を含む）
+- `claude/CLAUDE.md`: ユーザー固有の指示とガイドライン
+
+#### フックスクリプト
+- `hook_fetch.sh`: WebFetch前の処理
+- `hook_pre_commands.sh`: コマンド実行前の処理  
+- `hook_stop_words.sh`: 読み込み制限の処理
+
+設定には以下のツールへのアクセス権限が含まれています：
+- パッケージマネージャー（pnpm、yarn、npm）のコマンド
+- Git操作（push、resetを除く）
+- MCPツール（Notion、Playwright、Postgres、Figma等）
+- 開発ツール（TypeScript、Jest、Biome等）
 
 ## 必要な依存関係
 

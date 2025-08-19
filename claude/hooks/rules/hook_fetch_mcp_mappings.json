@@ -1,0 +1,35 @@
+{
+  "mcp_mappings": {
+    "notion": {
+      "patterns": ["(www\\.)?notion\\.so"],
+      "message": "NotionのMCPツールを使用してください",
+      "tools": [
+        {
+          "name": "mcp__notion__API-post-search",
+          "description": "Notionコンテンツを検索"
+        },
+        {
+          "name": "mcp__notion__API-retrieve-a-page",
+          "description": "ページを取得"
+        },
+        {
+          "name": "mcp__notion__API-retrieve-a-database",
+          "description": "データベースを取得"
+        },
+        {
+          "name": "mcp__notion__API-post-database-query",
+          "description": "データベースをクエリ"
+        },
+        {
+          "name": "mcp__notion__API-get-block-children",
+          "description": "ブロックの子要素を取得"
+        }
+      ],
+      "id_extraction": {
+        "pattern": "[a-f0-9]{32}",
+        "uuid_format": true,
+        "example_usage": "mcp__notion__API-retrieve-a-page で page_id: \"{id}\" を使用"
+      }
+    }
+  }
+}

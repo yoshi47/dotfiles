@@ -1,0 +1,22 @@
+{
+  "network_commands": {
+    "commands": ["curl ", "wget "],
+    "message": "ネットワークコマンドの実行はブロックされています。必要な場合は手動で実行してください。"
+  },
+  "npm_packages": {
+    "commands": ["npm install", "npm i ", "npm add"],
+    "message": "npmパッケージのインストールはブロックされています。必要な場合は手動で実行してください。"
+  },
+  "yarn_packages": {
+    "commands": ["yarn add"],
+    "message": "yarnパッケージの追加はブロックされています。必要な場合は手動で実行してください。"
+  },
+  "pip_packages": {
+    "commands": ["pip install"],
+    "message": "pipパッケージのインストールはブロックされています。必要な場合は手動で実行してください。"
+  },
+  "system_packages": {
+    "commands": ["apt-get install", "brew install"],
+    "message": "システムパッケージのインストールはブロックされています。必要な場合は手動で実行してください。"
+  }
+}

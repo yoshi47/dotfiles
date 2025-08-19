@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "cleanupPeriodDays": 1000,
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Bash(pnpm type-check:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm unit-test:*)",
+      "Bash(pnpm format:*)",
+      "Bash(pnpm openapi:*)",
+      "Bash(pnpm run type-check:*)",
+      "Bash(cd web && pnpm type-check:*)",
+      "Bash(npm run format:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npm test)",
+      "Bash(yarn type-check)",
+      "Bash(yarn lint)",
+      "Bash(yarn lint:*)",
+      "Bash(yarn test:*)",
+      "Bash(yarn jest:*)",
+      "Bash(yarn tsx:*)",
+      "Bash(yarn tsc:*)",
+      "Bash(yarn openapi:*)",
+      "Bash(yarn biome check:*)",
+      "Bash(yarn install)",
+      "Bash(npx tsc:*)",
+      "Bash(npx biome check:*)",
+      "Bash(npx jest:*)",
+      "Bash(NODE_OPTIONS=\"--max-old-space-size=8192\" npx tsc --noEmit --incremental)",
+      "Bash(timeout 60 pnpm test -- --testPathPattern=\"DocumentsList\" --verbose --no-watch)",
+      "Bash(timeout 60 yarn test estimates.service.spec.ts --testNamePattern=\"findOne\")",
+      "Bash(PRISMA_LOG_QUERIES=true yarn dev)",
+      "Bash(./run-knip-and-squash.sh:*)",
+      "Bash(rg:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(echo:*)",
+      "Bash(chmod:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(mkdir:*)",
+      "Bash(ln:*)",
+      "Bash(sed:*)",
+      "Bash(git show:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git checkout:*)",
+      "Bash(git cherry-pick:*)",
+      "Bash(git commit:*)",
+      "Bash(git fetch:*)",
+      "Bash(nvm use)",
+      "Bash(nvm:*)",
+      "WebFetch(*)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:docs.sentry.io)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:mastra.ai)",
+      "WebFetch(domain:redux-toolkit.js.org)",
+      "WebFetch(domain:sbfl.net)",
+      "WebFetch(domain:www.notion.so)",
+      "WebFetch(domain:www.npmjs.com)",
+      "mcp__figma__get_figma_data",
+      "mcp__ide__executeCode",
+      "mcp__ide__getDiagnostics",
+      "mcp__postgres__query",
+      "mcp__notion__API-get-self",
+      "mcp__notion__API-get-users",
+      "mcp__notion__API-get-block-children",
+      "mcp__notion__API-post-database-query",
+      "mcp__notion__API-post-search",
+      "mcp__notion__API-retrieve-a-database",
+      "mcp__notion__API-retrieve-a-page",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_navigate_back",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_wait_for",
+      "mcp__serena__check_onboarding_performed",
+      "mcp__serena__find_file",
+      "mcp__serena__find_referencing_symbols",
+      "mcp__serena__find_symbol",
+      "mcp__serena__get_symbols_overview",
+      "mcp__serena__list_dir",
+      "mcp__serena__search_for_pattern",
+      "mcp__serena__write_memory"
+    ],
+    "deny": [
+      "Bash(sudo:*)",
+      "Bash(rm:*)",
+      "Bash(curl:*)",
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git rebase:*)",
+      "Read(.env.*)",
+      "Read(id_rsa)",
+      "Read(id_ed25519)",
+      "Read(**/*token*)",
+      "Read(**/*key*)",
+      "Write(.env*)",
+      "Write(**/secrets/**)",
+      "Bash(wget:*)",
+      "Bash(nc:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm remove:*)",
+      "Bash(psql:*)",
+      "Bash(mysql:*)",
+      "Bash(mongod:*)",
+      "mcp__supabase__execute_sql",
+      "Bash(pnpm reset:*)"
+    ]
+  },
+  "model": "opus",
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /Users/yoshiki.kadono/Documents/notification.wav"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /Users/yoshiki.kadono/Documents/celebration.wav"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/yoshiki.kadono/.claude/hooks/hook_stop_words.sh ${MESSAGE}"
+          }
+        ]
+      },
+      {
+        "matcher": "WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/yoshiki.kadono/.claude/hooks/hook_fetch.sh ${MESSAGE}"
+          }
+        ]
+      }
+    ]
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1754035909681
+  }
+}

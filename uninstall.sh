@@ -77,5 +77,19 @@ if [ -L "$HOME/.config/alacritty/alacritty.toml" ]; then
     fi
 fi
 
+# Remove Claude Code configuration
+if [ -L "$HOME/.claude" ]; then
+    print_info "Removing Claude Code configuration..."
+    rm "$HOME/.claude"
+    print_info "Removed Claude Code symlink"
+    
+    # Check if there's a backup to restore
+    LATEST_BACKUP=$(ls -t "$HOME"/.claude.backup.* 2>/dev/null | head -n1)
+    if [ -n "$LATEST_BACKUP" ]; then
+        print_warning "Found backup: $LATEST_BACKUP"
+        print_warning "You can restore it manually with: mv '$LATEST_BACKUP' '$HOME/.claude'"
+    fi
+fi
+
 print_info "Dotfiles uninstallation completed!"
 print_warning "Note: .env.local was not removed for security reasons"

@@ -116,6 +116,29 @@ if [ -f "$DOTFILES_DIR/alacritty/alacritty.toml" ]; then
     fi
 fi
 
+# Claude Code configuration
+if [ -d "$DOTFILES_DIR/claude" ]; then
+    print_info "Setting up Claude Code configuration..."
+    
+    # Backup existing .claude directory if it exists
+    if [ -d "$HOME/.claude" ] && [ ! -L "$HOME/.claude" ]; then
+        print_warning "Existing ~/.claude directory found. Backing up to ~/.claude.backup"
+        mv "$HOME/.claude" "$HOME/.claude.backup.$(date +%Y%m%d_%H%M%S)"
+    fi
+    
+    # Create symbolic link for the entire .claude directory
+    create_symlink "$DOTFILES_DIR/claude" "$HOME/.claude"
+    
+    # Update hook paths in settings.json
+    if [ -f "$DOTFILES_DIR/claude/settings.json" ]; then
+        print_info "Updating hook paths in settings.json..."
+        sed -i.bak "s|/Users/yoshiki.kadono/.claude/hooks/|$DOTFILES_DIR/claude/hooks/|g" "$DOTFILES_DIR/claude/settings.json"
+        rm "$DOTFILES_DIR/claude/settings.json.bak"
+    fi
+    
+    print_info "Claude Code configuration installed!"
+fi
+
 # Create .env.local from example if it doesn't exist
 if [ ! -f "$HOME/.env.local" ]; then
     print_info "Creating .env.local from template..."
