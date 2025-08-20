@@ -74,7 +74,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 . "$HOME/.local/bin/env"
 
 # Aliases
-alias claude="/Users/yoshiki.kadono/.claude/local/claude"
 alias rm='rmtrash'
 
 # Initialize zoxide (better cd)
