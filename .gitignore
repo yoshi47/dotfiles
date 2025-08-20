@@ -21,3 +21,8 @@ Thumbs.db
 .env
 .env.local
 secrets/
+
+# Claude directories (allow only commands/ and hooks/)
+claude/*
+!claude/commands/
+!claude/hooks/
