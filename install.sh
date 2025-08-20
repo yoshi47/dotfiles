@@ -139,6 +139,29 @@ if [ -d "$DOTFILES_DIR/claude" ]; then
     print_info "Claude Code configuration installed!"
 fi
 
+# MCP (Model Context Protocol) configuration for multiple editors
+if [ -f "$DOTFILES_DIR/mcp/config.json" ]; then
+    print_info "Setting up MCP configuration for multiple editors..."
+    
+    # Claude Code
+    create_symlink "$DOTFILES_DIR/mcp/config.json" "$HOME/.claude.json"
+    
+    # Cursor
+    mkdir -p "$HOME/.cursor"
+    create_symlink "$DOTFILES_DIR/mcp/config.json" "$HOME/.cursor/mcp.json"
+    
+    # Roo Code
+    mkdir -p "$HOME/.roo"
+    create_symlink "$DOTFILES_DIR/mcp/config.json" "$HOME/.roo/mcp.json"
+    
+    # Windsurf (if needed)
+    mkdir -p "$HOME/.windsurf"
+    create_symlink "$DOTFILES_DIR/mcp/config.json" "$HOME/.windsurf/mcp.json"
+    
+    print_info "MCP configuration linked for Claude Code, Cursor, Roo Code, and Windsurf!"
+    print_warning "Remember to update API keys in $DOTFILES_DIR/mcp/config.json"
+fi
+
 # Create .env.local from example if it doesn't exist
 if [ ! -f "$HOME/.env.local" ]; then
     print_info "Creating .env.local from template..."

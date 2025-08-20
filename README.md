@@ -13,11 +13,18 @@ dotfiles/
 ├── claude/           # Claude Code設定
 │   ├── settings.json # 統合設定ファイル
 │   ├── CLAUDE.md     # ユーザー指示
+│   ├── commands/     # スラッシュコマンド
+│   │   ├── create-pr.sh
+│   │   ├── pr-status.sh
+│   │   └── config.json
 │   └── hooks/        # フックスクリプト
 │       ├── hook_fetch.sh
 │       ├── hook_pre_commands.sh
 │       ├── hook_stop_words.sh
 │       └── rules/
+├── mcp/              # MCP共通設定（複数エディタ対応）
+│   ├── config.json   # MCPサーバー設定
+│   └── README.md     # MCP設定ガイド
 ├── git/              # Git設定
 │   ├── .gitconfig
 │   └── .gitignore_global
@@ -120,6 +127,11 @@ chmod +x uninstall.sh
 - `claude/settings.json`: 統合設定ファイル（全プロジェクトの権限、フック、モデル設定を含む）
 - `claude/CLAUDE.md`: ユーザー固有の指示とガイドライン
 
+#### スラッシュコマンド
+利用可能なコマンド:
+- `/create-pr` または `/pr`: 現在のブランチのPRを作成
+- `/pr-status` または `/prs`: 現在のブランチのPRステータスを確認
+
 #### フックスクリプト
 - `hook_fetch.sh`: WebFetch前の処理
 - `hook_pre_commands.sh`: コマンド実行前の処理  
@@ -130,6 +142,26 @@ chmod +x uninstall.sh
 - Git操作（push、resetを除く）
 - MCPツール（Notion、Playwright、Postgres、Figma等）
 - 開発ツール（TypeScript、Jest、Biome等）
+
+### MCP (Model Context Protocol) 共通設定
+
+`mcp/config.json`は複数のエディタで共有されるMCPサーバー設定です：
+
+#### 対応エディタ
+- Claude Code (`~/.claude.json`)
+- Cursor (`~/.cursor/mcp.json`)
+- Roo Code (`~/.roo/mcp.json`)
+- Windsurf (`~/.windsurf/mcp.json`)
+
+#### 含まれるMCPサーバー
+- PostgreSQL データベース接続
+- Excel ファイル操作
+- Prisma ORM
+- Notion API
+- Playwright ブラウザ自動化
+- Figma デザインツール
+
+インストール時に各エディタの設定場所へ自動的にシンボリックリンクが作成されます。
 
 ## 必要な依存関係
 

@@ -1,0 +1,39 @@
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://meetsone:meetsone@localhost:5432/meetsone"
+      ]
+    },
+    "excel": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@negokaz/excel-mcp-server@latest"]
+    },
+    "prisma": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-prisma"]
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-notion"],
+      "env": {
+        "NOTION_API_KEY": "your-notion-api-key"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-playwright"]
+    },
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-figma"],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "your-figma-token"
+      }
+    }
+  }
+}
