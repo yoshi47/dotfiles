@@ -31,17 +31,18 @@ zshaddhistory() {
 }
 
 # History options
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
-setopt hist_save_no_dups
-setopt hist_reduce_blanks
-setopt hist_expire_dups_first
-setopt hist_find_no_dups
-setopt hist_no_store
-setopt extended_history
-setopt inc_append_history
-setopt no_flow_control
+setopt hist_ignore_space # 前頭がスペースのみの場合はヒストリに追加しない
+setopt hist_ignore_all_dups # 重複するコマンドラインは古い方を削除する
+setopt hist_ignore_dups # 直前と同じコマンドラインはヒストリに追加しない
+setopt hist_save_no_dups # 古いコマンドと同じものはヒストリに追加しない
+setopt hist_reduce_blanks # 先頭と末尾の空白を削除する
+setopt hist_expire_dups_first # 重複するコマンドラインは古い方から削除する
+setopt hist_find_no_dups # ヒストリの検索時に重複を無視する
+setopt hist_no_store # history コマンド自体はヒストリに追加しない
+setopt extended_history # タイムスタンプ情報を保存する
+setopt inc_append_history # 即座にヒストリファイルに追加する
+setopt share_history # ターミナル間でヒストリを共有する
+setopt no_flow_control # Ctrl-S, Ctrl-Q でのフロー制御を無効化
 
 # Initialize completion system
 autoload -Uz compinit && compinit
