@@ -1,6 +1,3 @@
-# Zscaler Certificate (for corporate environments)
-export NODE_EXTRA_CA_CERTS="/Applications/Zscaler/cert/ZscalerRootCertificate-2048-SHA256.crt"
-export NODE_TLS_REJECT_UNAUTHORIZED=0
 
 # Path configurations
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
@@ -14,8 +11,8 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv init --path)"
 
-# API Keys (consider using .env file or keychain)
-source ~/.env.local
+# Load local configuration (API keys, environment-specific settings)
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # History configuration
 HISTSIZE=100000
@@ -79,5 +76,15 @@ alias rm='rmtrash'
 
 # Initialize zoxide (better cd)
 eval "$(zoxide init zsh)"
+
+# pnpm
+export PNPM_HOME="/Users/yoshiki.kadono/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# Kiro terminal integration
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 export PATH="$PATH:"
