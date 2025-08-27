@@ -1,0 +1,53 @@
+projects = { "/Users/yoshiki.kadono/meetsone.worktrees/yoshiki/claude" = { trust_level = "trusted" } }
+
+notify = ["bash", "afplay /Users/yoshiki.kadono/Documents/celebration.wav"]
+
+[mcp_servers.excel]
+command = "npx"
+args = [
+  "-y",
+  "@negokaz/excel-mcp-server@latest",
+  "--stdio"
+]
+
+[mcp_servers.postgres]
+command = "npx"
+args = [
+  "-y",
+  "@modelcontextprotocol/server-postgres",
+  "postgresql://meetsone:meetsone@localhost:5432/meetsone"
+]
+
+[mcp_servers.prisma]
+command = "npx"
+args = [
+  "-y",
+  "prisma",
+  "mcp"
+]
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@latest"]
+
+[mcp_servers.claude]
+command = "claude"
+args = ["mcp", "serve"]
+env = {}
+
+[mcp_servers.figma]
+command = "npx"
+args = [
+  "-y",
+  "figma-developer-mcp@latest",
+  "--figma-api-key=FIGMA_API_KEY",
+  "--stdio"
+]
+
+[mcp_servers.notionApi]
+command = "npx"
+args = [
+  "-y",
+  "@notionhq/notion-mcp-server"
+]
+env = { "OPENAPI_MCP_HEADERS" = "{\"Authorization\": \"Bearer NOTION_API_KEY\", \"Notion-Version\": \"2022-06-28\" }" }

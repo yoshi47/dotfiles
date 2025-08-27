@@ -26,3 +26,7 @@ secrets/
 claude/*
 !claude/commands/
 !claude/hooks/
+
+# Codex directories (allow only commands/ and hooks/)
+codex/*
+!codex/config.toml
