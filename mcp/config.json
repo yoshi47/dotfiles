@@ -34,6 +34,15 @@
       "env": {
         "FIGMA_ACCESS_TOKEN": "your-figma-token"
       }
+    },
+    "serena": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server"
+      ]
     }
   }
 }
