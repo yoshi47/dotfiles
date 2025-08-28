@@ -11,26 +11,41 @@
     "excel": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@negokaz/excel-mcp-server@latest"]
+      "args": [
+        "-y",
+        "@negokaz/excel-mcp-server@latest"
+      ]
     },
     "prisma": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-prisma"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-prisma"
+      ]
     },
     "notion": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-notion"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-notion"
+      ],
       "env": {
         "NOTION_API_KEY": "your-notion-api-key"
       }
     },
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-playwright"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-playwright"
+      ]
     },
     "figma": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-figma"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-figma"
+      ],
       "env": {
         "FIGMA_ACCESS_TOKEN": "your-figma-token"
       }
@@ -42,6 +57,13 @@
         "git+https://github.com/oraios/serena",
         "serena",
         "start-mcp-server"
+      ]
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
       ]
     }
   }
