@@ -65,6 +65,13 @@
         "-y",
         "@upstash/context7-mcp@latest"
       ]
+    },
+    "mastra": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mastra/mcp-docs-server"
+      ]
     }
   }
 }
