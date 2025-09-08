@@ -30,11 +30,6 @@ args = [
 command = "npx"
 args = ["@playwright/mcp@latest"]
 
-[mcp_servers.claude]
-command = "claude"
-args = ["mcp", "serve"]
-env = {}
-
 [mcp_servers.figma]
 command = "npx"
 args = [
