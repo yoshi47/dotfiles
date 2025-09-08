@@ -1,7 +1,8 @@
 DBの値を確認する場合はMCPを利用してください
 commandを実行する際はserver フォルダ or web フォルダに移動してから実行してください
 tenantの情報が必要な場合はtenantKeyがmeetsmoreのテナントを利用してください
-type-checkコマンド yarn type-check
+type-check
+アロー関数を使ってください
 
 # Hooks Files Removal Guideline
 
