@@ -26,6 +26,7 @@ allowed-tools: ["Bash"]
 - PRの既存の内容は削除しないでください。
 - PRのボディはテンプレートをコピーしてそこに追記する形で作成する
 - draft PRを作成する
+- tmp/pr_body.mdファイルは作成後に削除する
 
 例：
 - ブランチ名: yoshiki/NONE-123
