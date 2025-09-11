@@ -53,7 +53,7 @@
       "Bash(git fetch:*)",
       "Bash(nvm use)",
       "Bash(nvm:*)",
-      "WebFetch(*)",
+      "WebFetch(domain:*)",
       "List(*)",
       "Write(/tmp/pr_body.md)",
       "Bash(git push:*)",
