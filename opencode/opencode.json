@@ -41,7 +41,8 @@
       "command": [
         "npx",
         "-y",
-        "@modelcontextprotocol/server-prisma"
+        "prisma",
+        "mcp"
       ],
       "enabled": true
     },
@@ -50,11 +51,11 @@
       "command": [
         "npx",
         "-y",
-        "@modelcontextprotocol/server-notion"
+        "@notionhq/notion-mcp-server"
       ],
       "enabled": true,
       "environment": {
-        "NOTION_API_KEY": "your-notion-api-key"
+        "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer NOTION_API_KEY\", \"Notion-Version\": \"2022-06-28\" }"
       }
     },
     "playwright": {
@@ -62,7 +63,7 @@
       "command": [
         "npx",
         "-y",
-        "@modelcontextprotocol/server-playwright"
+        "@playwright/mcp@latest"
       ],
       "enabled": true
     },
@@ -73,7 +74,7 @@
         "-y",
         "@modelcontextprotocol/server-figma"
       ],
-      "enabled": true,
+      "enabled": false,
       "environment": {
         "FIGMA_ACCESS_TOKEN": "your-figma-token"
       }
