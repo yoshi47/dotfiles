@@ -46,7 +46,7 @@ autoload -Uz compinit && compinit
 
 # Plugin configurations
 source ~/fzf-tab/fzf-tab.plugin.zsh
-source ~/enhancd/init.sh
+# source ~/enhancd/init.sh
 source ~/fzf.zsh
 eval "$(starship init zsh)"
 
