@@ -1,6 +1,6 @@
 ---
 description: "Create a pull request for the current branch"
-allowed-tools: ["Bash"]
+allowed-tools: ["Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(git add:*)", "Bash(git commit:*)", "Bash(git push:*)", "Bash(gh pr create:*)", "Bash(ls:*)", "Bash(cat:*)", "Bash(rm /tmp/pr_body.md)", "Read", "Write(/tmp/pr_body.md)"]
 ---
 
 現在のブランチからPull Requestを作成してください。
