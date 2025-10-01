@@ -25,6 +25,7 @@ allowed-tools: ["Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Ba
 - プロジェクトのPRテンプレートがある場合は必ずそれを使用する
 - PRの既存の内容は削除しないでください。
 - PRのボディはテンプレートをコピーしてそこに追記する形で作成する
+- チェックリストのチェックも忘れないでください
 - draft PRを作成する
 - tmp/pr_body.mdファイルは作成後に削除する
 
