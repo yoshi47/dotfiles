@@ -1,6 +1,8 @@
 projects = { "/Users/yoshiki.kadono/meetsone.worktrees/yoshiki/claude" = { trust_level = "trusted" } }
 
-notify = ["bash", "afplay /Users/yoshiki.kadono/Documents/celebration.wav"]
+notify = ["bash", "-lc", "afplay ~/Documents/celebration.wav"]
+model = "gpt-5"
+model_reasoning_effort = "high"
 
 [mcp_servers.excel]
 command = "npx"
