@@ -117,7 +117,6 @@
       "Bash(pnpm reset:*)"
     ]
   },
-  "model": "opus",
   "hooks": {
     "Notification": [
       {
@@ -160,8 +159,20 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/yoshiki.kadono/.claude/hooks/bash_timeout_notifier.sh ${MESSAGE}"
+          }
+        ]
+      }
     ]
   },
+  "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754035909681
   }
