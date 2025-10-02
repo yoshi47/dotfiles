@@ -1,3 +1,7 @@
+---
+description: Clean up $ARGUMENTS from the meetsone codebase
+---
+
 meetsoneのコードベースから $ARGUMENTS を削除してください。
 削除する前に使用されている箇所がないかを確認してください。
 flagの場合、常にtrueとなるような実装にしてください。
