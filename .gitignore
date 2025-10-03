@@ -30,3 +30,4 @@ claude/*
 # Codex directories (allow only commands/ and hooks/)
 codex/*
 !codex/config.toml
+!prompts/
