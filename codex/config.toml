@@ -4,6 +4,9 @@ notify = ["bash", "-lc", "afplay ~/Documents/celebration.wav"]
 model = "gpt-5"
 model_reasoning_effort = "high"
 
+[tools]
+web_search = true
+
 [mcp_servers.excel]
 command = "npx"
 args = [
