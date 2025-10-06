@@ -1,6 +1,6 @@
 ---
 description: "Create a pull request for the current branch or specified branch"
-allowed-tools: ["Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(git add:*)", "Bash(git commit:*)", "Bash(git push:*)", "Bash(gh pr create:*)", "Bash(ls:*)", "Bash(cat:*)", "Bash(rm /tmp/pr_body.md)", "Bash(git checkout:*)", "Bash(git branch:*)", "Read", "Write(/tmp/pr_body.md)"]
+allowed-tools: ["Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(git add:*)", "Bash(git commit:*)", "Bash(git push:*)", "Bash(gh pr create:*)", "Bash(ls:*)", "Bash(cat:*)", "Bash(rm /tmp/pr_body.md)", "Bash(git checkout:*)", "Bash(git branch:*)", "Bash(git branch --list:*)", "Bash(git rev-parse:*)", "Read", "Write(/tmp/pr_body.md)"]
 ---
 
 指定されたブランチ（$ARGUMENTS）またはcurrentブランチからPull Requestを作成してください。
