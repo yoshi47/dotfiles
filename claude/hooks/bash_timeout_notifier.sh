@@ -23,6 +23,8 @@ if echo "$TOOL_RESULT" | grep -qi -e "timed out" -e "timeout" -e "exceeded.*time
 
     # Output warning message to stderr
     echo "⚠️  Bashコマンドがタイムアウトしました" >&2
+
+    exit 2
 fi
 
 exit 0
