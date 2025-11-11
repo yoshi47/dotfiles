@@ -18,5 +18,9 @@
   "system_packages": {
     "commands": ["apt-get install", "brew install"],
     "message": "システムパッケージのインストールはブロックされています。必要な場合は手動で実行してください。"
+  },
+  "git_dangerous": {
+    "commands": ["git reset", "git rebase -i", "git push --force", "git push -f"],
+    "message": "危険なGitコマンドの実行はブロックされています。履歴を変更する操作は手動で実行してください。"
   }
 }
