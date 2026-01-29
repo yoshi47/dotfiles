@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.40",
+  "base_commit_sha": "3114507d6b0945f1dcc5ee436304748d257dd303",
+  "prompts": {
+    "5f538acc5dd80bc7": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "2fa63321-5b5d-4683-9048-128693b0b959",
+        "model": "anthropic/claude-opus-4-5-20251101"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 7,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    }
+  }
+}
