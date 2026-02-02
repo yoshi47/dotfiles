@@ -1,0 +1,23 @@
+dot_codex/private_config.toml
+  bd11104ee63b86f1 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.42",
+  "base_commit_sha": "7e4f12eb1b6bfb7b2a05814adcf9b29ccb443762",
+  "prompts": {
+    "bd11104ee63b86f1": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "ff231355-b47b-401a-8ada-9a8ed602aad6",
+        "model": "gpt-5.2"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
