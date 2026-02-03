@@ -1,0 +1,49 @@
+dot_codex/private_config.toml
+  bd11104ee63b86f1 8,15-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.42",
+  "base_commit_sha": "24883651a78b7f5658cdbf027172efb25ac3dc06",
+  "prompts": {
+    "0617ba301fdc48d8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fb57107b-3696-42ef-89e2-2f70e121de8b",
+        "model": "claude-opus-4-5-20251101"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "5f538acc5dd80bc7": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "2fa63321-5b5d-4683-9048-128693b0b959",
+        "model": "anthropic/claude-opus-4-5-20251101"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 7,
+      "total_deletions": 7,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "bd11104ee63b86f1": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "ff231355-b47b-401a-8ada-9a8ed602aad6",
+        "model": "composer-1"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 5,
+      "overriden_lines": 0
+    }
+  }
+}
