@@ -1,7 +1,3 @@
-dot_config/opencode/bun.lock
-  8349b97414fd1203 7,12,14
-dot_config/opencode/package.json
-  8349b97414fd1203 3
 ---
 {
   "schema_version": "authorship/3.0.0",
@@ -18,7 +14,7 @@ dot_config/opencode/package.json
       "messages": [],
       "total_additions": 0,
       "total_deletions": 0,
-      "accepted_lines": 7,
+      "accepted_lines": 3,
       "overriden_lines": 0
     }
   }
