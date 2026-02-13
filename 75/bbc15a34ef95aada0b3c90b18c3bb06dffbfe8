@@ -1,0 +1,23 @@
+dot_codex/private_config.toml
+  20f26b883330e1ef 2,90
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.2",
+  "base_commit_sha": "75bbc15a34ef95aada0b3c90b18c3bb06dffbfe8",
+  "prompts": {
+    "20f26b883330e1ef": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_3ab60219bffeBHfduJEW27xcr9",
+        "model": "anthropic/claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 2,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    }
+  }
+}
