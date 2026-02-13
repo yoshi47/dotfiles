@@ -1,0 +1,23 @@
+dot_claude/settings.json
+  8349b97414fd1203 9-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.3",
+  "base_commit_sha": "482d83ca57b45c8185914bb4f22696bf5a491362",
+  "prompts": {
+    "8349b97414fd1203": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_3aa28a59affeyAEqnYAgTDCeLx",
+        "model": "anthropic/claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 10,
+      "total_deletions": 7,
+      "accepted_lines": 10,
+      "overriden_lines": 0
+    }
+  }
+}
