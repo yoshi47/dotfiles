@@ -1,0 +1,25 @@
+dot_config/opencode/bun.lock
+  8349b97414fd1203 7,12,14
+dot_config/opencode/package.json
+  8349b97414fd1203 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.3",
+  "base_commit_sha": "99f48271d7c539cf9a5fa8f315d4698a758dad44",
+  "prompts": {
+    "8349b97414fd1203": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_3aa28a59affeyAEqnYAgTDCeLx",
+        "model": "anthropic/claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 7,
+      "overriden_lines": 0
+    }
+  }
+}
