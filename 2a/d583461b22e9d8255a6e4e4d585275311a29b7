@@ -16,19 +16,6 @@
       "total_deletions": 2,
       "accepted_lines": 2,
       "overriden_lines": 0
-    },
-    "7b8c72d50dfee3bb": {
-      "agent_id": {
-        "tool": "claude",
-        "id": "f640979e-1df0-4c90-98d1-cffc3d59d0a3",
-        "model": "claude-opus-4-6"
-      },
-      "human_author": "kururu <kururu6966@gmail.com>",
-      "messages": [],
-      "total_additions": 22,
-      "total_deletions": 20,
-      "accepted_lines": 18,
-      "overriden_lines": 0
     }
   }
 }
