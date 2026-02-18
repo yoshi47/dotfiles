@@ -1,0 +1,23 @@
+.python-version
+  9901ac333925fa45 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.4",
+  "base_commit_sha": "06c5edf3de372531b427e6fbd2c60b0367d4d4f4",
+  "prompts": {
+    "9901ac333925fa45": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e4b6f37f-b61d-4ef5-b108-686df2f9b40a",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 0,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
