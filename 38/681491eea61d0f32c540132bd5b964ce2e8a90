@@ -1,0 +1,31 @@
+.chezmoiignore
+  7c2e8d5227eceedc 3
+.chezmoiscripts/run_onchange_after_generate-ai-skills.sh.tmpl
+  7c2e8d5227eceedc 4
+.gitignore
+  7c2e8d5227eceedc 4-6
+lefthook.yml
+  7c2e8d5227eceedc 54,67,76
+chezmoiskills/generate-skills.py
+  7c2e8d5227eceedc 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.4",
+  "base_commit_sha": "38681491eea61d0f32c540132bd5b964ce2e8a90",
+  "prompts": {
+    "7c2e8d5227eceedc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7c9ca63c-8263-4efe-886f-2ce2d97f1b7a",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 13,
+      "total_deletions": 5,
+      "accepted_lines": 13,
+      "overriden_lines": 0
+    }
+  }
+}
