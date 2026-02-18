@@ -1,0 +1,42 @@
+chezmoiskills/README.md
+  433b0b5797c8e073 1,41,44,50
+chezmoiskills/generate-skills.py
+  433b0b5797c8e073 4,42-43
+.chezmoiignore
+  433b0b5797c8e073 6
+.chezmoiscripts/run_onchange_after_generate-ai-skills.sh.tmpl
+  433b0b5797c8e073 2-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.4",
+  "base_commit_sha": "4f4a8ebb0fe0b4ef88aae585301811892734d2a9",
+  "prompts": {
+    "433b0b5797c8e073": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fd4a0e5c-cd7a-47db-9b08-1ec44e689957",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 51,
+      "total_deletions": 58,
+      "accepted_lines": 64,
+      "overriden_lines": 0
+    },
+    "98d26c992c8ec9e6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbd2a88a-2434-45bb-89da-3a15472968e2",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 128,
+      "overriden_lines": 0
+    }
+  }
+}
