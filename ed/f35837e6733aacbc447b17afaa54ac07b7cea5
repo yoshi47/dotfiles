@@ -1,36 +1,7 @@
-dot_claude/skills/omemo/SKILL.md
-  2e48ca144f86ea58 1-80
 ---
 {
   "schema_version": "authorship/3.0.0",
   "git_ai_version": "1.1.4",
   "base_commit_sha": "edf35837e6733aacbc447b17afaa54ac07b7cea5",
-  "prompts": {
-    "2e48ca144f86ea58": {
-      "agent_id": {
-        "tool": "claude",
-        "id": "fff79240-fd9b-47a3-ad13-63f8d7361e6c",
-        "model": "claude-opus-4-6"
-      },
-      "human_author": "kururu <kururu6966@gmail.com>",
-      "messages": [],
-      "total_additions": 83,
-      "total_deletions": 3,
-      "accepted_lines": 80,
-      "overriden_lines": 0
-    },
-    "752b0c646d014568": {
-      "agent_id": {
-        "tool": "claude",
-        "id": "0bd34c2c-c848-4d6c-8597-8dd4a14acba1",
-        "model": "claude-opus-4-6"
-      },
-      "human_author": "kururu <kururu6966@gmail.com>",
-      "messages": [],
-      "total_additions": 221,
-      "total_deletions": 10,
-      "accepted_lines": 213,
-      "overriden_lines": 0
-    }
-  }
+  "prompts": {}
 }
