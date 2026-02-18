@@ -1,0 +1,34 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.4",
+  "base_commit_sha": "a1515853e419f254ecd71cfe3bcb839c3491349e",
+  "prompts": {
+    "433b0b5797c8e073": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fd4a0e5c-cd7a-47db-9b08-1ec44e689957",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 36,
+      "total_deletions": 21,
+      "accepted_lines": 36,
+      "overriden_lines": 0
+    },
+    "98d26c992c8ec9e6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbd2a88a-2434-45bb-89da-3a15472968e2",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 1499,
+      "total_deletions": 91,
+      "accepted_lines": 1438,
+      "overriden_lines": 0
+    }
+  }
+}
