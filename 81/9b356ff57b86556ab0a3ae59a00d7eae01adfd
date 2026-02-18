@@ -1,0 +1,27 @@
+run_onchange_roo-code-sync.sh.tmpl
+  752b0c646d014568 1-62
+dot_config/private_roo-code/private_roo-code-settings.json.tmpl
+  752b0c646d014568 14,26,39
+.claude/CLAUDE.md
+  752b0c646d014568 55,62,64-66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.4",
+  "base_commit_sha": "819b356ff57b86556ab0a3ae59a00d7eae01adfd",
+  "prompts": {
+    "752b0c646d014568": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0bd34c2c-c848-4d6c-8597-8dd4a14acba1",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 5,
+      "accepted_lines": 70,
+      "overriden_lines": 0
+    }
+  }
+}
