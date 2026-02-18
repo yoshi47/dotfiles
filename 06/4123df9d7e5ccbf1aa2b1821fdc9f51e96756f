@@ -1,0 +1,27 @@
+chezmoiskills/generate-skills.py
+  3be87715e8aa3ae7 19-20,27-49,237,241,243-256
+chezmoiskills/skills/open-plan.md
+  3be87715e8aa3ae7 6-8
+chezmoiskills/skills/playwright-cli.md
+  3be87715e8aa3ae7 6-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.4",
+  "base_commit_sha": "064123df9d7e5ccbf1aa2b1821fdc9f51e96756f",
+  "prompts": {
+    "3be87715e8aa3ae7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "70677a3d-08a8-4a3a-857d-3793c6260c9d",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 53,
+      "total_deletions": 1,
+      "accepted_lines": 53,
+      "overriden_lines": 0
+    }
+  }
+}
