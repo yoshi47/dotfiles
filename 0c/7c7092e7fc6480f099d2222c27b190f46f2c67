@@ -1,0 +1,23 @@
+.gitignore
+  487a1b48c0f7e31c 6-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "0c7c7092e7fc6480f099d2222c27b190f46f2c67",
+  "prompts": {
+    "487a1b48c0f7e31c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ded04f50-35f2-49f6-a317-43dd06cc1d83",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Yoshiki Kadono <yoshiki.kadono@meetsmore.com>",
+      "messages": [],
+      "total_additions": 13,
+      "total_deletions": 0,
+      "accepted_lines": 13,
+      "overriden_lines": 0
+    }
+  }
+}
