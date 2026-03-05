@@ -1,0 +1,11 @@
+#!/bin/bash
+# Fetch memos SQLite DB from remote and start read-only MCP server
+set -euo pipefail
+
+DB_PATH="${HOME}/memos.db"
+
+# Download latest DB from remote
+scp memos:/var/opt/memos/memos_prod.db "$DB_PATH" >&2
+
+# Start read-only SQLite MCP server
+exec uvx mcp-server-sqlite --db-path "$DB_PATH"

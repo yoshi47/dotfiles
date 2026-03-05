@@ -1,6 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "cleanupPeriodDays": 1000,
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -44,6 +47,8 @@
       "Bash(mkdir:*)",
       "Bash(ln:*)",
       "Bash(sed:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
       "Bash(git show:*)",
       "Bash(git log:*)",
       "Bash(git add:*)",
@@ -57,14 +62,6 @@
       "List(*)",
       "Write(/tmp/pr_body.md)",
       "Bash(git push:*)",
-      "WebFetch(domain:docs.anthropic.com)",
-      "WebFetch(domain:docs.sentry.io)",
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:mastra.ai)",
-      "WebFetch(domain:redux-toolkit.js.org)",
-      "WebFetch(domain:sbfl.net)",
-      "WebFetch(domain:www.notion.so)",
-      "WebFetch(domain:www.npmjs.com)",
       "mcp__figma__get_figma_data",
       "mcp__ide__executeCode",
       "mcp__ide__getDiagnostics",
@@ -76,14 +73,6 @@
       "mcp__notion__API-post-search",
       "mcp__notion__API-retrieve-a-database",
       "mcp__notion__API-retrieve-a-page",
-      "mcp__playwright__browser_click",
-      "mcp__playwright__browser_close",
-      "mcp__playwright__browser_navigate",
-      "mcp__playwright__browser_navigate_back",
-      "mcp__playwright__browser_snapshot",
-      "mcp__playwright__browser_take_screenshot",
-      "mcp__playwright__browser_type",
-      "mcp__playwright__browser_wait_for",
       "mcp__serena__check_onboarding_performed",
       "mcp__serena__find_file",
       "mcp__serena__find_referencing_symbols",
@@ -91,32 +80,81 @@
       "mcp__serena__get_symbols_overview",
       "mcp__serena__list_dir",
       "mcp__serena__search_for_pattern",
-      "mcp__serena__write_memory"
+      "mcp__serena__write_memory",
+      "mcp__notionApi__API-get-self",
+      "mcp__notionApi__API-get-user",
+      "mcp__notionApi__API-get-users",
+      "mcp__notionApi__API-get-block-children",
+      "mcp__notionApi__API-retrieve-a-block",
+      "mcp__notionApi__API-retrieve-a-comment",
+      "mcp__notionApi__API-retrieve-a-data-source",
+      "mcp__notionApi__API-retrieve-a-database",
+      "mcp__notionApi__API-retrieve-a-page",
+      "mcp__notionApi__API-retrieve-a-page-property",
+      "mcp__notionApi__API-list-data-source-templates",
+      "mcp__notionApi__API-query-data-source",
+      "mcp__notionApi__API-post-search",
+      "WebSearch",
+      "Bash(playwright-cli:*)",
+      "Bash(npx playwright-cli:*)",
+      "Bash(gh search:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr status:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh issue status:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh repo list:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh run watch:*)",
+      "Bash(gh workflow list:*)",
+      "Bash(gh workflow view:*)",
+      "Bash(gh release list:*)",
+      "Bash(gh release view:*)",
+      "Bash(gh status:*)",
+      "Bash(gh browse:*)",
+      "Bash(gh label list:*)",
+      "Bash(gh cache list:*)",
+      "Skill(*)"
     ],
     "deny": [
       "Bash(sudo:*)",
       "Bash(rm:*)",
-      "Bash(curl:*)",
       "Bash(git reset:*)",
       "Bash(git rebase:*)",
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
-      "Read(.env.*)",
+      "Read(.env*)",
+      "Read(.envrc*)",
       "Read(id_rsa)",
       "Read(id_ed25519)",
       "Read(**/*token*)",
-      "Read(**/*key*)",
+      "Read(**/*_key)",
       "Write(.env*)",
       "Write(**/secrets/**)",
       "Bash(wget:*)",
       "Bash(nc:*)",
       "Bash(npm uninstall:*)",
       "Bash(npm remove:*)",
+      "Bash(printenv:*)",
       "Bash(psql:*)",
       "Bash(mysql:*)",
       "Bash(mongod:*)",
       "mcp__supabase__execute_sql",
-      "Bash(pnpm reset:*)"
+      "Bash(pnpm reset:*)",
+      "mcp__notionApi__API-create-a-comment",
+      "mcp__notionApi__API-create-a-data-source",
+      "mcp__notionApi__API-delete-a-block",
+      "mcp__notionApi__API-move-page",
+      "mcp__notionApi__API-patch-block-children",
+      "mcp__notionApi__API-patch-page",
+      "mcp__notionApi__API-post-page",
+      "mcp__notionApi__API-update-a-block",
+      "mcp__notionApi__API-update-a-data-source"
     ]
   },
   "hooks": {
@@ -126,38 +164,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /Users/yoshiki.kadono/Documents/notification.wav"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "afplay /Users/yoshiki.kadono/Documents/celebration.wav"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Read",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/yoshiki.kadono/.claude/hooks/hook_stop_words.sh ${MESSAGE}"
-          }
-        ]
-      },
-      {
-        "matcher": "WebFetch",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/yoshiki.kadono/.claude/hooks/hook_fetch.sh ${MESSAGE}"
+            "command": "afplay ~/Documents/notification.wav > /dev/null 2>&1 &"
           }
         ]
       }
@@ -168,7 +175,67 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/yoshiki.kadono/.claude/hooks/bash_timeout_notifier.sh ${MESSAGE}"
+            "command": "~/.claude/hooks/bash_timeout_notifier.sh ${MESSAGE}"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git-ai checkpoint claude --hook-input stdin"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/hook_stop_words.sh ${MESSAGE}"
+          }
+        ]
+      },
+      {
+        "matcher": "WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/hook_fetch.sh ${MESSAGE}"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git-ai checkpoint claude --hook-input stdin"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay ~/Documents/celebration.wav > /dev/null 2>&1 &"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/plugins/cache/work-checkpoints-plugin/work-checkpoints/1.0.3/scripts/save-checkpoint.sh"
           }
         ]
       }
@@ -178,7 +245,12 @@
     "type": "command",
     "command": "~/.claude/scripts/statusline.js"
   },
-  "alwaysThinkingEnabled": true,
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "work-checkpoints@work-checkpoints-plugin": true,
+    "swift-lsp@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true
+  },
   "feedbackSurveyState": {
     "lastShownTime": 1754035909681
   }

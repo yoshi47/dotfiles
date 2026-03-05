@@ -13,12 +13,12 @@
           "description": "ページを取得"
         },
         {
-          "name": "mcp__notion__API-retrieve-a-database",
-          "description": "データベースを取得"
+          "name": "mcp__notion__API-retrieve-a-data-source",
+          "description": "データソース（データベース）を取得"
         },
         {
-          "name": "mcp__notion__API-post-database-query",
-          "description": "データベースをクエリ"
+          "name": "mcp__notion__API-query-data-source",
+          "description": "データソース（データベース）をクエリ"
         },
         {
           "name": "mcp__notion__API-get-block-children",

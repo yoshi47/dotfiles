@@ -1,0 +1,175 @@
+{
+  "providerProfiles": {
+    "currentApiConfigName": "chatGPT",
+    "apiConfigs": {
+      "chatGPT": {
+        "todoListEnabled": true,
+        "modelTemperature": null,
+        "rateLimitSeconds": 0,
+        "consecutiveMistakeLimit": 3,
+        "apiModelId": "gpt-5.2",
+        "openAiNativeApiKey": "OPENAI_API_KEY",
+        "apiProvider": "openai-native",
+        "id": "t2cuz027fg"
+      },
+      "opus": {
+        "todoListEnabled": true,
+        "modelTemperature": null,
+        "rateLimitSeconds": 0,
+        "consecutiveMistakeLimit": 3,
+        "enableReasoningEffort": true,
+        "apiModelId": "claude-opus-4-6",
+        "apiKey": "ANTHROPIC_API_KEY",
+        "apiProvider": "anthropic",
+        "id": "8qmjr40ilwc"
+      },
+      "sonnet": {
+        "todoListEnabled": true,
+        "modelTemperature": null,
+        "rateLimitSeconds": 0,
+        "consecutiveMistakeLimit": 3,
+        "enableReasoningEffort": true,
+        "apiModelId": "claude-sonnet-4-6",
+        "apiKey": "ANTHROPIC_API_KEY",
+        "anthropicBeta1MContext": true,
+        "apiProvider": "anthropic",
+        "id": "v9ulr4dzsba"
+      }
+    },
+    "modeApiConfigs": {
+      "code": "8qmjr40ilwc",
+      "architect": "t2cuz027fg",
+      "ask": "v9ulr4dzsba",
+      "debug": "v9ulr4dzsba",
+      "orchestrator": "v9ulr4dzsba"
+    }
+  },
+  "globalSettings": {
+    "lastShownAnnouncementId": "feb-2026-v3.48.0-sonnet-46-stability-locked-config",
+    "openRouterImageApiKey": "",
+    "openRouterImageGenerationSelectedModel": "",
+    "customCondensingPrompt": "",
+    "autoApprovalEnabled": true,
+    "alwaysAllowReadOnly": true,
+    "alwaysAllowReadOnlyOutsideWorkspace": false,
+    "alwaysAllowWrite": true,
+    "alwaysAllowWriteOutsideWorkspace": false,
+    "alwaysAllowWriteProtected": false,
+    "writeDelayMs": 1000,
+    "requestDelaySeconds": 10,
+    "alwaysAllowMcp": true,
+    "alwaysAllowModeSwitch": false,
+    "alwaysAllowSubtasks": true,
+    "alwaysAllowExecute": true,
+    "alwaysAllowFollowupQuestions": false,
+    "followupAutoApproveTimeoutMs": 60000,
+    "allowedCommands": [
+      "git log",
+      "git diff",
+      "git show",
+      "npm test",
+      "tsc",
+      "git status",
+      "cd server && npm run type-check",
+      "cd server && pwd",
+      "pwd",
+      "cd web && npm run type-check",
+      "cd server && git status",
+      "cd server && git log --oneline -10",
+      "cd server && npm test",
+      "cd server && yarn type-check",
+      "cd server",
+      "cd web && npm test",
+      "cd web && yarn type-check",
+      "cd web && pnpm type-check",
+      "cd web",
+      "pnpm type-check",
+      "cat",
+      "chezmoi diff",
+      "cd apps/server"
+    ],
+    "deniedCommands": [],
+    "allowedMaxRequests": null,
+    "allowedMaxCost": null,
+    "autoCondenseContext": true,
+    "autoCondenseContextPercent": 100,
+    "includeCurrentTime": true,
+    "includeCurrentCost": true,
+    "maxGitStatusFiles": 0,
+    "includeDiagnosticMessages": true,
+    "maxDiagnosticMessages": 50,
+    "enableCheckpoints": true,
+    "checkpointTimeout": 15,
+    "ttsEnabled": false,
+    "ttsSpeed": 1,
+    "soundEnabled": true,
+    "soundVolume": 0.5,
+    "maxOpenTabsContext": 20,
+    "maxWorkspaceFiles": 200,
+    "showRooIgnoredFiles": true,
+    "enableSubfolderRules": false,
+    "maxImageFileSize": 5,
+    "maxTotalImageSize": 20,
+    "terminalOutputPreviewSize": "medium",
+    "terminalShellIntegrationTimeout": 5000,
+    "terminalShellIntegrationDisabled": true,
+    "terminalCommandDelay": 0,
+    "terminalPowershellCounter": false,
+    "terminalZshClearEolMark": true,
+    "terminalZshOhMy": false,
+    "terminalZshP10k": false,
+    "terminalZdotdir": false,
+    "rateLimitSeconds": 0,
+    "experiments": {
+      "preventFocusDisruption": true,
+      "imageGeneration": false,
+      "runSlashCommand": true,
+      "customTools": true
+    },
+    "codebaseIndexModels": {
+      "openai": {
+        "text-embedding-3-small": {
+          "dimension": 1536
+        },
+        "text-embedding-3-large": {
+          "dimension": 3072
+        },
+        "text-embedding-ada-002": {
+          "dimension": 1536
+        }
+      },
+      "openai-compatible": {
+        "text-embedding-3-small": {
+          "dimension": 1536
+        },
+        "text-embedding-3-large": {
+          "dimension": 3072
+        },
+        "text-embedding-ada-002": {
+          "dimension": 1536
+        },
+        "nomic-embed-code": {
+          "dimension": 3584
+        }
+      }
+    },
+    "language": "en",
+    "telemetrySetting": "enabled",
+    "mcpEnabled": true,
+    "mode": "ask",
+    "customModes": [],
+    "customModePrompts": {
+      "code": {
+        "customInstructions": "日本語でお願いします"
+      }
+    },
+    "customSupportPrompts": {
+      "CONDENSE": ""
+    },
+    "includeTaskHistoryInEnhance": false,
+    "reasoningBlockCollapsed": true,
+    "enterBehavior": "send",
+    "profileThresholds": {},
+    "hasOpenedModeSelector": true
+  }
+}

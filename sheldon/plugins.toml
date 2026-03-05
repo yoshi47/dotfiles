@@ -1,0 +1,18 @@
+shell = "zsh"
+
+[plugins.zsh-smartcache]
+github = "QuarticCat/zsh-smartcache"
+
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+
+[plugins.zsh-autosuggestions.hooks]
+pre = 'export ZSH_AUTOSUGGEST_STRATEGY=(history completion)'
+post = 'ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste up-line-or-search down-line-or-search expand-or-complete accept-line push-line-or-edit)'
+
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
+

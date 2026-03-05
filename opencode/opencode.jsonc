@@ -1,0 +1,204 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "server": {
+    "hostname": "0.0.0.0"
+  },
+  "provider": {
+    "openai": {
+      "models": {
+        "gpt-5": {
+          "options": {
+            "reasoningEffort": "high",
+            "textVerbosity": "low",
+            "reasoningSummary": "auto",
+            "include": ["reasoning.encrypted_content"],
+          },
+        },
+      },
+    },
+  },
+  "formatter": {
+    "biome": {
+      "command": [
+        "npx",
+        "biome",
+        "check",
+        "$FILE"
+      ],
+      "extensions": [
+        ".js",
+        ".ts",
+        ".jsx",
+        ".tsx"
+      ]
+    }
+  },
+  "mcp": {
+    "postgres": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "{env:DATABASE_URL}"
+      ],
+      "enabled": true
+    },
+    "excel": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@negokaz/excel-mcp-server@latest"
+      ],
+      "enabled": true
+    },
+    "prisma": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "prisma",
+        "mcp"
+      ],
+      "enabled": true
+    },
+    "notion": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@notionhq/notion-mcp-server"
+      ],
+      "enabled": true,
+      "environment": {
+        "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer {env:NOTION_API_TOKEN}\", \"Notion-Version\": \"2022-06-28\" }"
+      }
+    },
+    "figma": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-figma"
+      ],
+      "enabled": false,
+      "environment": {
+        "FIGMA_ACCESS_TOKEN": "{env:FIGMA_ACCESS_TOKEN}"
+      }
+    },
+    "serena": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server"
+      ],
+      "enabled": false
+    },
+    "context7": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ],
+      "enabled": true
+    },
+    "mastra": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@mastra/mcp-docs-server"
+      ],
+      "enabled": true
+    }
+  },
+  "keybinds": {
+    "command_list": "ctrl+shift+p",
+    "history_previous": "up,ctrl+p",
+    "history_next": "down,ctrl+n",
+    "input_move_up": "up,ctrl+p",
+    "input_move_down": "down,ctrl+n"
+  },
+  "default_agent": "chat",
+  "permission": {
+    "bash": {
+      "pnpm type-check*": "allow",
+      "pnpm lint*": "allow",
+      "pnpm test*": "allow",
+      "pnpm unit-test*": "allow",
+      "pnpm format*": "allow",
+      "pnpm openapi*": "allow",
+      "pnpm run type-check*": "allow",
+      "cd web && pnpm type-check*": "allow",
+      "npm run format*": "allow",
+      "npm run type-check*": "allow",
+      "npm test": "allow",
+      "yarn type-check": "allow",
+      "yarn lint": "allow",
+      "yarn lint*": "allow",
+      "yarn test*": "allow",
+      "yarn jest*": "allow",
+      "yarn tsx*": "allow",
+      "yarn tsc*": "allow",
+      "yarn openapi*": "allow",
+      "yarn biome check*": "allow",
+      "yarn install": "allow",
+      "npx tsc*": "allow",
+      "npx biome check*": "allow",
+      "npx jest*": "allow",
+      "NODE_OPTIONS=\"--max-old-space-size=8192\" npx tsc --noEmit --incremental": "allow",
+      "timeout 60 pnpm test*": "allow",
+      "timeout 60 yarn test*": "allow",
+      "PRISMA_LOG_QUERIES=true yarn dev": "allow",
+      "./run-knip-and-squash.sh*": "allow",
+      "rg*": "allow",
+      "grep*": "allow",
+      "find*": "allow",
+      "ls*": "allow",
+      "echo*": "allow",
+      "chmod*": "allow",
+      "cp*": "allow",
+      "mv*": "allow",
+      "mkdir*": "allow",
+      "ln*": "allow",
+      "sed*": "allow",
+      "git show*": "allow",
+      "git log*": "allow",
+      "git add*": "allow",
+      "git checkout*": "allow",
+      "git cherry-pick*": "allow",
+      "git commit*": "allow",
+      "git fetch*": "allow",
+      "git push*": "allow",
+      "nvm use": "allow",
+      "nvm*": "allow",
+      "playwright-cli*": "allow",
+      "npx playwright-cli*": "allow",
+      "chezmoi diff*": "allow",
+      "sudo*": "deny",
+      "rm*": "deny",
+      "curl*": "deny",
+      "git reset --hard*": "deny",
+      "git rebase*": "deny",
+      "git clone*": "deny",
+      "pkill*": "deny",
+      "kill*": "deny",
+      "wget*": "deny",
+      "nc*": "deny",
+      "npm uninstall*": "deny",
+      "npm remove*": "deny",
+      "psql*": "deny",
+      "mysql*": "deny",
+      "mongod*": "deny",
+      "pnpm reset*": "deny",
+      "*": "ask"
+    },
+    "webfetch": "allow",
+    "edit": "ask"
+  }
+}

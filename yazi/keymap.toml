@@ -1,0 +1,25 @@
+[mgr]
+prepend_keymap = [
+  # Emacs-style navigation
+  { on = "<C-n>", run = "arrow 1",  desc = "Move cursor down" },
+  { on = "<C-p>", run = "arrow -1", desc = "Move cursor up" },
+  { on = "<C-f>", run = "enter",    desc = "Enter directory" },
+  { on = "<C-b>", run = "leave",    desc = "Go to parent" },
+
+  # Quick jump
+  { on = ["g", "h"], run = "cd ~",           desc = "Go to home" },
+  { on = ["g", "d"], run = "cd ~/Downloads", desc = "Go to Downloads" },
+  { on = ["g", "c"], run = "cd ~/.config",   desc = "Go to .config" },
+
+  # Toggles
+  { on = "H", run = "hidden toggle", desc = "Toggle hidden files" },
+
+  # Help
+  { on = "?", run = "help", desc = "Show help" },
+
+  # Smart filter (replaces default f)
+  { on = "f", run = "plugin smart-filter", desc = "Smart filter" },
+
+  # Toggle pane
+  { on = "T", run = "plugin toggle-pane max-preview", desc = "Maximize preview" },
+]

@@ -3,8 +3,8 @@
 
 INPUT=$(cat)
 
-HOOK_FETCH_PATH="/Users/yoshiki.kadono/.claude/hooks/rules/hook_fetch_rules.json"
-HOOK_MCP_MAPPINGS_PATH="/Users/yoshiki.kadono/.claude/hooks/rules/hook_fetch_mcp_mappings.json"
+HOOK_FETCH_PATH="$HOME/.claude/hooks/rules/hook_fetch_rules.json"
+HOOK_MCP_MAPPINGS_PATH="$HOME/.claude/hooks/rules/hook_fetch_mcp_mappings.json"
 
 # ツール名を取得
 TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name')

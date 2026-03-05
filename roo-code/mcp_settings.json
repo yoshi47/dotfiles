@@ -1,0 +1,126 @@
+{
+	"mcpServers": {
+		"excel": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@negokaz/excel-mcp-server@latest",
+				"--stdio"
+			],
+			"alwaysAllow": [
+				"write_data_to_excel",
+				"create_workbook",
+				"create_worksheet",
+				"read_data_from_excel",
+				"get_workbook_metadata",
+				"excel_read_sheet"
+			]
+		},
+		"postgres": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-postgres",
+				"postgresql://username:password@localhost:5432/postgres"
+			],
+			"alwaysAllow": [
+				"query",
+				"access_mcp_resource"
+			]
+		},
+		"prisma": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"prisma",
+				"mcp"
+			],
+			"disabled": true,
+			"alwaysAllow": [
+				"migrate-status"
+			]
+		},
+		"claude": {
+			"command": "claude",
+			"args": [
+				"mcp",
+				"serve"
+			],
+			"env": {},
+			"disabled": true,
+			"alwaysAllow": [
+				"WebFetch",
+				"Read",
+				"Grep"
+			]
+		},
+		"Figma": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"figma-developer-mcp@latest",
+				"--figma-api-key=FIGMA_API_KEY",
+				"--stdio"
+			],
+			"disabled": true,
+			"alwaysAllow": []
+		},
+		"notionApi": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@notionhq/notion-mcp-server"
+			],
+			"env": {
+				"OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer NOTION_API_KEY\", \"Notion-Version\": \"2022-06-28\" }"
+			},
+			"alwaysAllow": [
+				"API-retrieve-a-page",
+				"API-get-block-children"
+			]
+		},
+		"context7": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@upstash/context7-mcp"
+			],
+			"env": {
+				"DEFAULT_MINIMUM_TOKENS": ""
+			},
+			"alwaysAllow": [
+				"resolve-library-id",
+				"get-library-docs"
+			]
+		},
+		"serena": {
+			"command": "uvx",
+			"args": [
+				"--from",
+				"git+https://github.com/oraios/serena",
+				"serena",
+				"start-mcp-server"
+			],
+			"disabled": true,
+			"alwaysAllow": [
+				"activate_project",
+				"check_onboarding_performed",
+				"read_memory",
+				"search_for_pattern",
+				"onboarding",
+				"list_dir",
+				"read_file",
+				"write_memory",
+				"find_file",
+				"get_symbols_overview",
+				"find_symbol",
+				"find_referencing_symbols",
+				"list_memories",
+				"think_about_collected_information",
+				"think_about_task_adherence",
+				"think_about_whether_you_are_done",
+				"prepare_for_new_conversation"
+			]
+		}
+	}
+}

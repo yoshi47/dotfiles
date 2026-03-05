@@ -1,25 +1,84 @@
 
+# Reset PATH on re-source to prevent accumulation
+if [[ -n $_ZSHRC_LOADED ]]; then
+  export PATH="$_ZSHRC_ORIGINAL_PATH"
+fi
+_ZSHRC_ORIGINAL_PATH="${_ZSHRC_ORIGINAL_PATH:-$PATH}"
+
 # Path configurations
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-# Node version manager
-eval "$(nodenv init -)"
+# Bun path
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Python version manager
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv init --path)"
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
-# Load local configuration (API keys, environment-specific settings)
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+# git-ai
+export PATH="$HOME/.git-ai/bin:$PATH"
+
+export PATH="$HOME/bin:$PATH"
+
+# Disable zsh default completion menu (required for fzf-tab)
+# Must be set before compinit to override /etc/zshrc defaults
+zstyle ':completion:*' menu no
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+# fzf-tab configuration
+if [[ -n "$TMUX" ]]; then
+  zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+  zstyle ':fzf-tab:*' popup-min-size 80 12
+fi
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always $realpath'
+zstyle ':fzf-tab:complete:(cat|bat|less|head|tail|vim|nvim):*' fzf-preview 'bat --color=always --style=numbers --line-range=:200 $realpath 2>/dev/null || eza --color=always $realpath'
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
+zstyle ':fzf-tab:complete:kill:*' fzf-preview 'ps -p $word -o pid,user,%cpu,%mem,command'
+
+# sheldon (plugin manager) - cached for faster startup
+_sheldon_cache="${XDG_CACHE_HOME:-$HOME/.cache}/sheldon/source.zsh"
+_sheldon_bin=$(command -v sheldon)
+if [[ ! -f "$_sheldon_cache" || ~/.config/sheldon/plugins.toml -nt "$_sheldon_cache" || "$_sheldon_bin" -nt "$_sheldon_cache" ]]; then
+  mkdir -p "${_sheldon_cache:h}"
+  sheldon source > "${_sheldon_cache}.tmp" && mv "${_sheldon_cache}.tmp" "$_sheldon_cache"
+fi
+source "$_sheldon_cache"
+
+# smartcache: cached init scripts (no defer - avoids first-keypress lag)
+smartcache eval mise activate zsh
+smartcache eval zoxide init zsh
+smartcache eval direnv hook zsh
+
+# starship - select theme config based on tmux palette
+if [[ -n "$TMUX_THEME_PALETTE" && "$TMUX_THEME_PALETTE" != "dracula" ]]; then
+  export STARSHIP_CONFIG="$HOME/.config/starship_personal.toml"
+fi
+
+# starship - cached for faster startup (per palette)
+_starship_config="${STARSHIP_CONFIG:-$HOME/.config/starship.toml}"
+_starship_cache="${XDG_CACHE_HOME:-$HOME/.cache}/starship/init-${TMUX_THEME_PALETTE:-default}.zsh"
+_starship_bin=$(command -v starship)
+if [[ ! -f "$_starship_cache" || "$_starship_config" -nt "$_starship_cache" || "$_starship_bin" -nt "$_starship_cache" ]]; then
+  mkdir -p "${_starship_cache:h}"
+  starship init zsh > "${_starship_cache}.tmp" && mv "${_starship_cache}.tmp" "$_starship_cache"
+fi
+source "$_starship_cache"
 
 # History configuration
 HISTSIZE=100000
 SAVEHIST=100000
 
 # History patterns to exclude
-HISTORY_IGNORE="(node 'node_modules/.bin/jest'*|cd server &&*|cd web &&*|cd /Users/yoshiki.kadono/meetsone/server &&*)"
+HISTORY_IGNORE="(node 'node_modules/.bin/jest'*|cd server &&*|cd web &&*)"
 
 # Function to exclude certain commands from history
 zshaddhistory() {
@@ -41,32 +100,10 @@ setopt extended_history # タイムスタンプ情報を保存する
 # setopt share_history # ターミナル間でヒストリを共有する
 setopt no_flow_control # Ctrl-S, Ctrl-Q でのフロー制御を無効化
 
-# Initialize completion system
-autoload -Uz compinit && compinit
-
-# Plugin configurations
-source ~/fzf-tab/fzf-tab.plugin.zsh
-# source ~/enhancd/init.sh
-source ~/fzf.zsh
-eval "$(starship init zsh)"
-
-# Zsh plugins
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-COMPLETION_WAITING_DOTS="true"
-
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste up-line-or-search down-line-or-search expand-or-complete accept-line push-line-or-edit)
-
-# Docker Desktop completions
-fpath=(/Users/yoshiki.kadono/.docker/completions $fpath)
-
-# Bun completions
-[ -s "/Users/yoshiki.kadono/.bun/_bun" ] && source "/Users/yoshiki.kadono/.bun/_bun"
-
-# Bun path
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# Local file sources
+source ~/.config/zsh/fzf.zsh 2>/dev/null
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # Local environment variables
 . "$HOME/.local/bin/env"
@@ -74,17 +111,50 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Aliases
 alias rm='rmtrash'
 
-# Initialize zoxide (better cd)
-eval "$(zoxide init zsh)"
+# eza (ls replacement)
+alias ls='eza --icons'
+alias ll='eza -l --git --time-style=relative --icons'
+alias la='eza -la --git --time-style=relative --icons'
+alias lt='eza --tree --level=2 --icons'
 
-# pnpm
-export PNPM_HOME="/Users/yoshiki.kadono/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+# memos DB viewer
+alias memos-db='scp memos:/var/opt/memos/memos_prod.db ~/memos.db && open -a "Beekeeper Studio" ~/memos.db'
+
+# Playwright with persistent profiles
+alias pw-work='npx playwright open --user-data-dir=~/.playwright/profiles/work'
+alias pw-private='npx playwright open --user-data-dir=~/.playwright/profiles/private'
+
+COMPLETION_WAITING_DOTS="true"
+
+# Docker Desktop completions
+if (( ! ${fpath[(Ie)$HOME/.docker/completions]} )); then
+  fpath=($HOME/.docker/completions $fpath)
+fi
 
 # Kiro terminal integration
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
-export PATH="$PATH:"
+# tmux pane border integration (dir / git / running command)
+[ -f ~/.config/tmux/scripts/pane_border_hooks.zsh ] && source ~/.config/tmux/scripts/pane_border_hooks.zsh
+
+# yazi wrapper: reset tmux pane_current_path after exit
+# Without this, tmux tracks yazi's browsed directory as the pane CWD,
+# causing new splits to open in yazi's last-visited directory.
+yazi() {
+  if [[ -n "$TMUX_THEME_PALETTE" && "$TMUX_THEME_PALETTE" != "dracula" ]]; then
+    local _yazi_tmp="$(mktemp -d)"
+    for item in ~/.config/yazi/*; do
+      ln -sf "$item" "$_yazi_tmp/"
+    done
+    rm -f "$_yazi_tmp/theme.toml"
+    printf '[flavor]\ndark  = "monokai-vibrant"\nlight = "monokai-vibrant"\n' > "$_yazi_tmp/theme.toml"
+    YAZI_CONFIG_HOME="$_yazi_tmp" command yazi "$@"
+    rm -rf "$_yazi_tmp"
+  else
+    command yazi "$@"
+  fi
+  # Re-emit OSC 7 with the shell's actual CWD so tmux picks it up
+  printf '\e]7;file://%s%s\e\\' "$HOST" "$PWD"
+}
+
+_ZSHRC_LOADED=1

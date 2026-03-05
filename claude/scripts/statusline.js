@@ -6,6 +6,7 @@ const readline = require('readline');
 
 // Constants
 const COMPACTION_THRESHOLD = 200000 * 0.8; // 80% of 200K tokens
+const PLANS_DIR = path.join(process.env.HOME, '.claude', 'plans');
 
 // Read JSON from stdin
 let input = '';
@@ -19,8 +20,9 @@ process.stdin.on('end', async () => {
     const currentDir = path.basename(data.workspace?.current_dir || data.cwd || '.');
     const sessionId = data.session_id;
 
-    // Calculate token usage for current session
+    // Calculate token usage and get slug for current session
     let totalTokens = 0;
+    let sessionSlug = null;
 
     if (sessionId) {
       // Find all transcript files
@@ -37,7 +39,9 @@ process.stdin.on('end', async () => {
           const transcriptFile = path.join(projectDir, `${sessionId}.jsonl`);
 
           if (fs.existsSync(transcriptFile)) {
-            totalTokens = await calculateTokensFromTranscript(transcriptFile);
+            const result = await parseTranscript(transcriptFile);
+            totalTokens = result.totalTokens;
+            sessionSlug = result.slug;
             break;
           }
         }
@@ -55,8 +59,12 @@ process.stdin.on('end', async () => {
     if (percentage >= 70) percentageColor = '\x1b[33m'; // Yellow
     if (percentage >= 90) percentageColor = '\x1b[31m'; // Red
 
+    // Get session plan name (if plan file exists for this session's slug)
+    const sessionPlan = getSessionPlanName(sessionSlug);
+    const planDisplay = sessionPlan ? ` | 📋 ${sessionPlan}` : '';
+
     // Build status line
-    const statusLine = `[${model}] 📁 ${currentDir} | 🪙 ${tokenDisplay} | ${percentageColor}${percentage}%\x1b[0m`;
+    const statusLine = `[${model}] 📁 ${currentDir} | 🪙 ${tokenDisplay} | ${percentageColor}${percentage}%\x1b[0m${planDisplay}`;
 
     console.log(statusLine);
 
@@ -65,9 +73,10 @@ process.stdin.on('end', async () => {
   }
 });
 
-async function calculateTokensFromTranscript(filePath) {
+async function parseTranscript(filePath) {
   return new Promise((resolve, reject) => {
     let lastUsage = null;
+    let slug = null;
 
     const fileStream = fs.createReadStream(filePath);
     const rl = readline.createInterface({
@@ -83,22 +92,25 @@ async function calculateTokensFromTranscript(filePath) {
         if (entry.type === 'assistant' && entry.message?.usage) {
           lastUsage = entry.message.usage;
         }
+
+        // Get slug from any entry that has it
+        if (entry.slug && !slug) {
+          slug = entry.slug;
+        }
       } catch (e) {
         // Skip invalid JSON lines
       }
     });
 
     rl.on('close', () => {
+      let totalTokens = 0;
       if (lastUsage) {
-        // The last usage entry contains cumulative tokens
-        const totalTokens = (lastUsage.input_tokens || 0) +
+        totalTokens = (lastUsage.input_tokens || 0) +
           (lastUsage.output_tokens || 0) +
           (lastUsage.cache_creation_input_tokens || 0) +
           (lastUsage.cache_read_input_tokens || 0);
-        resolve(totalTokens);
-      } else {
-        resolve(0);
       }
+      resolve({ totalTokens, slug });
     });
 
     rl.on('error', (err) => {
@@ -115,3 +127,18 @@ function formatTokenCount(tokens) {
   }
   return tokens.toString();
 }
+
+const getSessionPlanName = (slug) => {
+  if (!slug) {
+    return null;
+  }
+  try {
+    const planFile = path.join(PLANS_DIR, `${slug}.md`);
+    if (fs.existsSync(planFile)) {
+      return slug;
+    }
+    return null;
+  } catch (e) {
+    return null;
+  }
+};
