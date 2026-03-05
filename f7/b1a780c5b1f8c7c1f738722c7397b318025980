@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "f7b1a780c5b1f8c7c1f738722c7397b318025980",
+  "prompts": {
+    "487a1b48c0f7e31c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ded04f50-35f2-49f6-a317-43dd06cc1d83",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Yoshiki Kadono <yoshiki.kadono@meetsmore.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 13,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    }
+  }
+}
