@@ -1,0 +1,23 @@
+.claude/CLAUDE.md
+  553517503287767e 53-64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.3",
+  "base_commit_sha": "5582d38437afb942a57e67376d5231de6cd17387",
+  "prompts": {
+    "553517503287767e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "898cf0d4-929b-4eff-98af-5a5d5b6b32cb",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 12,
+      "overriden_lines": 0
+    }
+  }
+}

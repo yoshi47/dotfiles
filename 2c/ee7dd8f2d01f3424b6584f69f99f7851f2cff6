@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.1",
+  "base_commit_sha": "2cee7dd8f2d01f3424b6584f69f99f7851f2cff6",
+  "prompts": {
+    "7c7ad33d4456620e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6be477a1-d62b-40eb-a1d9-d3b8ed808dd7",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}

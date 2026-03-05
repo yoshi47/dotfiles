@@ -1,0 +1,25 @@
+lefthook.yml
+  967c3c612b84fcd3 1-73
+.gitignore
+  967c3c612b84fcd3 1-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.42",
+  "base_commit_sha": "26841a84b9c2f08533c13bd5c4bee83fdc46657f",
+  "prompts": {
+    "967c3c612b84fcd3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "16290206-7899-4bdd-abbb-95dc5567b93f",
+        "model": "claude-opus-4-5-20251101"
+      },
+      "human_author": "kururu <kururu6966@gmail.com>",
+      "messages": [],
+      "total_additions": 11,
+      "total_deletions": 12,
+      "accepted_lines": 76,
+      "overriden_lines": 0
+    }
+  }
+}
