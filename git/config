@@ -1,0 +1,85 @@
+[user]
+	useConfigOnly = true
+
+[include]
+	path = ~/.config/git/config.local
+
+[core]
+	pager = delta
+	quotePath = false
+	fsmonitor = true
+	untrackedCache = true
+
+[feature]
+	manyFiles = true
+
+[interactive]
+	diffFilter = delta --color-only
+
+[diff]
+	colorMoved = default
+	algorithm = histogram
+
+[merge]
+	conflictstyle = zdiff3
+
+[rebase]
+	autoStash = true
+	autoSquash = true
+
+[pull]
+	ff = only
+
+[push]
+	autoSetupRemote = true
+	followTags = true
+
+[fetch]
+	prune = true
+
+[rerere]
+	enabled = true
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[log]
+	date = iso-local
+
+[grep]
+	patternType = perl
+
+[transfer]
+	fsckObjects = true
+
+[commit]
+	graph = true
+
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+	syntax-theme = none
+	minus-style = red
+	minus-emph-style = bold red
+	plus-style = green
+	plus-emph-style = bold green
+	minus-non-emph-style = red
+	plus-non-emph-style = green
+	zero-style = normal
+	hunk-header-style = file line-number
+	hunk-header-decoration-style = none
+	diff-context = 9999
