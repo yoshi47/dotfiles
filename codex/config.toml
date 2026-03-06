@@ -1,6 +1,6 @@
 
 notify = ["bash", "-lc", "git-ai checkpoint codex --hook-input & afplay ~/Documents/celebration.wav"]
-model = "gpt-5.4"
+model = "gpt-5.3-codex"
 model_reasoning_effort = "high"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
@@ -29,48 +29,10 @@ args = ["-y", "@modelcontextprotocol/server-postgres"]
 env_vars = ["DATABASE_URL"]
 startup_timeout_sec = 60
 
-[mcp_servers.figma]
-command = "npx"
-args = ["-y", "figma-developer-mcp@latest", "--stdio"]
-env_vars = ["FIGMA_API_KEY"]
-startup_timeout_sec = 60
 
-[mcp_servers.notionApi]
-command = "npx"
-args = ["-y", "@notionhq/notion-mcp-server"]
-env_vars = ["OPENAPI_MCP_HEADERS"]
-startup_timeout_sec = 60
-
-enabled_tools = [
-  "API-get-self",
-  "API-get-user",
-  "API-get-users",
-  "API-get-block-children",
-  "API-retrieve-a-block",
-  "API-retrieve-a-comment",
-  "API-retrieve-a-data-source",
-  "API-retrieve-a-database",
-  "API-retrieve-a-page",
-  "API-retrieve-a-page-property",
-  "API-list-data-source-templates",
-  "API-query-data-source",
-  "API-post-search",
-]
-
-disabled_tools = [
-  "API-create-a-comment",
-  "API-create-a-data-source",
-  "API-delete-a-block",
-  "API-move-page",
-  "API-patch-block-children",
-  "API-patch-page",
-  "API-post-page",
-  "API-update-a-block",
-  "API-update-a-data-source",
-]
-[mcp_servers.chrome-devtools]
-command = "npx"
-args = ["chrome-devtools-mcp@latest"]
+[mcp_servers.claude-mem]
+command = "node"
+args = ["$HOME/.claude/plugins/marketplaces/thedotmack/plugin/scripts/mcp-server.cjs"]
 startup_timeout_sec = 60
 
 [mcp_servers.context7]

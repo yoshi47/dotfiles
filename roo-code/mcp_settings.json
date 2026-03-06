@@ -72,11 +72,25 @@
 				"@notionhq/notion-mcp-server"
 			],
 			"env": {
-				"OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer NOTION_API_KEY\", \"Notion-Version\": \"2022-06-28\" }"
+				"OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer NOTION_API_TOKEN\", \"Notion-Version\": \"2022-06-28\" }"
 			},
 			"alwaysAllow": [
 				"API-retrieve-a-page",
 				"API-get-block-children"
+			]
+		},
+		"claude-mem": {
+			"command": "node",
+			"args": [
+				"$HOME/.claude/plugins/marketplaces/thedotmack/plugin/scripts/mcp-server.cjs"
+			],
+			"alwaysAllow": [
+				"search",
+				"get_observations",
+				"smart_search",
+				"smart_outline",
+				"smart_unfold",
+				"timeline"
 			]
 		},
 		"context7": {

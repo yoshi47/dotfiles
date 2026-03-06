@@ -124,6 +124,7 @@
     "input_move_up": "up,ctrl+p",
     "input_move_down": "down,ctrl+n"
   },
+  "plugin": ["@bloodf/opencode-claude-mem"],
   "default_agent": "chat",
   "permission": {
     "bash": {
