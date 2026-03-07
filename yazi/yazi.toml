@@ -17,22 +17,25 @@ max_height   = 900
 airdrop = [
   { run = "~/.config/yazi/plugins/airdrop.yazi/airdrop %s", desc = "Share via AirDrop", for = "macos", orphan = true },
 ]
+vscode = [
+  { run = 'code %s', desc = "Open with VSCode", orphan = true },
+]
 open-with = [
   { run = 'app=$(osascript -e "try" -e "return POSIX path of (choose file of type {\"app\"} default location \"/Applications\")" -e "end try") && [ -n "$app" ] && open -a "$app" %s', desc = "Open with...", for = "macos", orphan = true },
 ]
 
 [open]
 rules = [
-  { url = "*/",                                                                                                       use = [ "edit", "open", "reveal", "open-with", "airdrop" ] },
-  { mime = "text/*",                                                                                                  use = [ "edit", "reveal", "open-with", "airdrop" ] },
-  { mime = "image/*",                                                                                                 use = [ "open", "reveal", "open-with", "airdrop" ] },
-  { mime = "{audio,video}/*",                                                                                         use = [ "play", "reveal", "open-with", "airdrop" ] },
-  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}",            use = [ "extract", "reveal", "open-with", "airdrop" ] },
-  { mime = "application/{json,ndjson}",                                                                               use = [ "edit", "reveal", "open-with", "airdrop" ] },
-  { mime = "*/javascript",                                                                                            use = [ "edit", "reveal", "open-with", "airdrop" ] },
-  { mime = "inode/empty",                                                                                             use = [ "edit", "reveal", "open-with", "airdrop" ] },
+  { url = "*/",                                                                                                       use = [ "edit", "open", "reveal", "vscode", "open-with", "airdrop" ] },
+  { mime = "text/*",                                                                                                  use = [ "edit", "reveal", "vscode", "open-with", "airdrop" ] },
+  { mime = "image/*",                                                                                                 use = [ "open", "reveal", "vscode", "open-with", "airdrop" ] },
+  { mime = "{audio,video}/*",                                                                                         use = [ "play", "reveal", "vscode", "open-with", "airdrop" ] },
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}",            use = [ "extract", "reveal", "vscode", "open-with", "airdrop" ] },
+  { mime = "application/{json,ndjson}",                                                                               use = [ "edit", "reveal", "vscode", "open-with", "airdrop" ] },
+  { mime = "*/javascript",                                                                                            use = [ "edit", "reveal", "vscode", "open-with", "airdrop" ] },
+  { mime = "inode/empty",                                                                                             use = [ "edit", "reveal", "vscode", "open-with", "airdrop" ] },
   { mime = "vfs/{absent,stale}",                                                                                      use = "download" },
-  { url = "*",                                                                                                        use = [ "open", "reveal", "open-with", "airdrop" ] },
+  { url = "*",                                                                                                        use = [ "open", "reveal", "vscode", "open-with", "airdrop" ] },
 ]
 
 [[plugin.prepend_previewers]]
