@@ -17,7 +17,7 @@ airdrop = [
   { run = "~/.config/yazi/plugins/airdrop.yazi/airdrop %s", desc = "Share via AirDrop", for = "macos", orphan = true },
 ]
 open-with = [
-  { run = 'app=$(osascript -e "try" -e "return POSIX path of (choose application as alias)" -e "end try") && [ -n "$app" ] && open -a "$app" %s', desc = "Open with...", for = "macos", orphan = true },
+  { run = 'app=$(osascript -e "try" -e "return POSIX path of (choose file of type {\"app\"} default location \"/Applications\")" -e "end try") && [ -n "$app" ] && open -a "$app" %s', desc = "Open with...", for = "macos", orphan = true },
 ]
 
 [open]
