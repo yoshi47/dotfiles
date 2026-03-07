@@ -17,6 +17,9 @@ prepend_keymap = [
   # Help
   { on = "?", run = "help", desc = "Show help" },
 
+  # Open file only (ignore dirs)
+  { on = "<Enter>", run = "plugin open-file", desc = "Open file (ignore dirs)" },
+
   # Smart filter (replaces default f)
   { on = "f", run = "plugin smart-filter", desc = "Smart filter" },
 
