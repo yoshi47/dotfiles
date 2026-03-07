@@ -14,6 +14,9 @@ prepend_keymap = [
   # Toggles
   { on = "H", run = "hidden toggle", desc = "Toggle hidden files" },
 
+  # Open with (auto-quit in picker mode)
+  { on = "o", run = "plugin picker-open", desc = "Open with..." },
+
   # Help
   { on = "?", run = "help", desc = "Show help" },
 

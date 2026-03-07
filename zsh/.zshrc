@@ -137,23 +137,14 @@ fi
 # tmux pane border integration (dir / git / running command)
 [ -f ~/.config/tmux/scripts/pane_border_hooks.zsh ] && source ~/.config/tmux/scripts/pane_border_hooks.zsh
 
+# yazi - select theme config based on tmux palette (like starship above)
+if [[ -n "$TMUX_THEME_PALETTE" && "$TMUX_THEME_PALETTE" != "dracula" ]]; then
+  export YAZI_CONFIG_HOME="$HOME/.config/yazi-personal"
+fi
+
 # yazi wrapper: reset tmux pane_current_path after exit
-# Without this, tmux tracks yazi's browsed directory as the pane CWD,
-# causing new splits to open in yazi's last-visited directory.
 yazi() {
-  if [[ -n "$TMUX_THEME_PALETTE" && "$TMUX_THEME_PALETTE" != "dracula" ]]; then
-    local _yazi_tmp="$(mktemp -d)"
-    for item in ~/.config/yazi/*; do
-      ln -sf "$item" "$_yazi_tmp/"
-    done
-    rm -f "$_yazi_tmp/theme.toml"
-    printf '[flavor]\ndark  = "monokai-vibrant"\nlight = "monokai-vibrant"\n' > "$_yazi_tmp/theme.toml"
-    YAZI_CONFIG_HOME="$_yazi_tmp" command yazi "$@"
-    rm -rf "$_yazi_tmp"
-  else
-    command yazi "$@"
-  fi
-  # Re-emit OSC 7 with the shell's actual CWD so tmux picks it up
+  command yazi "$@"
   printf '\e]7;file://%s%s\e\\' "$HOST" "$PWD"
 }
 
