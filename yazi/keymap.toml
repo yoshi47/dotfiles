@@ -26,3 +26,9 @@ prepend_keymap = [
   # Toggle pane
   { on = "T", run = "plugin toggle-pane max-preview", desc = "Maximize preview" },
 ]
+
+[pick]
+prepend_keymap = [
+  { on = "<C-n>", run = "arrow 1",  desc = "Move cursor down" },
+  { on = "<C-p>", run = "arrow -1", desc = "Move cursor up" },
+]
