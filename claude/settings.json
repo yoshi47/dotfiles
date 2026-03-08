@@ -1,11 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "cleanupPeriodDays": 1000,
+  "includeCoAuthoredBy": false,
+  "skipDangerousModePermissionPrompt": true,
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
-  "includeCoAuthoredBy": false,
   "permissions": {
+    "defaultMode": "bypassPermissions",
     "allow": [
       "Bash(pnpm type-check:*)",
       "Bash(pnpm lint:*)",
@@ -49,6 +51,8 @@
       "Bash(sed:*)",
       "Bash(head:*)",
       "Bash(tail:*)",
+      "Bash(nvm use)",
+      "Bash(nvm:*)",
       "Bash(git show:*)",
       "Bash(git log:*)",
       "Bash(git add:*)",
@@ -56,47 +60,7 @@
       "Bash(git cherry-pick:*)",
       "Bash(git commit:*)",
       "Bash(git fetch:*)",
-      "Bash(nvm use)",
-      "Bash(nvm:*)",
-      "WebFetch(domain:*)",
-      "List(*)",
-      "Write(/tmp/pr_body.md)",
       "Bash(git push:*)",
-      "mcp__figma__get_figma_data",
-      "mcp__ide__executeCode",
-      "mcp__ide__getDiagnostics",
-      "mcp__postgres__query",
-      "mcp__notion__API-get-self",
-      "mcp__notion__API-get-users",
-      "mcp__notion__API-get-block-children",
-      "mcp__notion__API-post-database-query",
-      "mcp__notion__API-post-search",
-      "mcp__notion__API-retrieve-a-database",
-      "mcp__notion__API-retrieve-a-page",
-      "mcp__serena__check_onboarding_performed",
-      "mcp__serena__find_file",
-      "mcp__serena__find_referencing_symbols",
-      "mcp__serena__find_symbol",
-      "mcp__serena__get_symbols_overview",
-      "mcp__serena__list_dir",
-      "mcp__serena__search_for_pattern",
-      "mcp__serena__write_memory",
-      "mcp__notionApi__API-get-self",
-      "mcp__notionApi__API-get-user",
-      "mcp__notionApi__API-get-users",
-      "mcp__notionApi__API-get-block-children",
-      "mcp__notionApi__API-retrieve-a-block",
-      "mcp__notionApi__API-retrieve-a-comment",
-      "mcp__notionApi__API-retrieve-a-data-source",
-      "mcp__notionApi__API-retrieve-a-database",
-      "mcp__notionApi__API-retrieve-a-page",
-      "mcp__notionApi__API-retrieve-a-page-property",
-      "mcp__notionApi__API-list-data-source-templates",
-      "mcp__notionApi__API-query-data-source",
-      "mcp__notionApi__API-post-search",
-      "WebSearch",
-      "Bash(playwright-cli:*)",
-      "Bash(npx playwright-cli:*)",
       "Bash(gh search:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr list:*)",
@@ -119,7 +83,45 @@
       "Bash(gh browse:*)",
       "Bash(gh label list:*)",
       "Bash(gh cache list:*)",
+      "Bash(playwright-cli:*)",
+      "Bash(npx playwright-cli:*)",
+      "WebFetch(domain:*)",
+      "WebSearch",
+      "List(*)",
       "Skill(*)",
+      "Write(/tmp/pr_body.md)",
+      "mcp__figma__get_figma_data",
+      "mcp__ide__executeCode",
+      "mcp__ide__getDiagnostics",
+      "mcp__postgres__query",
+      "mcp__notion__API-get-self",
+      "mcp__notion__API-get-users",
+      "mcp__notion__API-get-block-children",
+      "mcp__notion__API-post-database-query",
+      "mcp__notion__API-post-search",
+      "mcp__notion__API-retrieve-a-database",
+      "mcp__notion__API-retrieve-a-page",
+      "mcp__notionApi__API-get-self",
+      "mcp__notionApi__API-get-user",
+      "mcp__notionApi__API-get-users",
+      "mcp__notionApi__API-get-block-children",
+      "mcp__notionApi__API-retrieve-a-block",
+      "mcp__notionApi__API-retrieve-a-comment",
+      "mcp__notionApi__API-retrieve-a-data-source",
+      "mcp__notionApi__API-retrieve-a-database",
+      "mcp__notionApi__API-retrieve-a-page",
+      "mcp__notionApi__API-retrieve-a-page-property",
+      "mcp__notionApi__API-list-data-source-templates",
+      "mcp__notionApi__API-query-data-source",
+      "mcp__notionApi__API-post-search",
+      "mcp__serena__check_onboarding_performed",
+      "mcp__serena__find_file",
+      "mcp__serena__find_referencing_symbols",
+      "mcp__serena__find_symbol",
+      "mcp__serena__get_symbols_overview",
+      "mcp__serena__list_dir",
+      "mcp__serena__search_for_pattern",
+      "mcp__serena__write_memory",
       "mcp__plugin_claude-mem_mcp-search__search",
       "mcp__claude_ai_Slack__slack_search_public_and_private"
     ],
@@ -130,14 +132,6 @@
       "Bash(git rebase:*)",
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
-      "Read(.env*)",
-      "Read(.envrc*)",
-      "Read(id_rsa)",
-      "Read(id_ed25519)",
-      "Read(**/*token*)",
-      "Read(**/*_key)",
-      "Write(.env*)",
-      "Write(**/secrets/**)",
       "Bash(wget:*)",
       "Bash(nc:*)",
       "Bash(npm uninstall:*)",
@@ -146,8 +140,16 @@
       "Bash(psql:*)",
       "Bash(mysql:*)",
       "Bash(mongod:*)",
-      "mcp__supabase__execute_sql",
       "Bash(pnpm reset:*)",
+      "Read(.env*)",
+      "Read(.envrc*)",
+      "Read(id_rsa)",
+      "Read(id_ed25519)",
+      "Read(**/*token*)",
+      "Read(**/*_key)",
+      "Write(.env*)",
+      "Write(**/secrets/**)",
+      "mcp__supabase__execute_sql",
       "mcp__notionApi__API-create-a-comment",
       "mcp__notionApi__API-create-a-data-source",
       "mcp__notionApi__API-delete-a-block",
@@ -167,26 +169,6 @@
           {
             "type": "command",
             "command": "afplay ~/Documents/notification.wav > /dev/null 2>&1 &"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/bash_timeout_notifier.sh ${MESSAGE}"
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "git-ai checkpoint claude --hook-input stdin"
           }
         ]
       }
@@ -220,13 +202,22 @@
         ]
       }
     ],
-    "Stop": [
+    "PostToolUse": [
       {
-        "matcher": "",
+        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "afplay ~/Documents/celebration.wav > /dev/null 2>&1 &"
+            "command": "~/.claude/hooks/bash_timeout_notifier.sh ${MESSAGE}"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git-ai checkpoint claude --hook-input stdin"
           }
         ]
       }
@@ -241,7 +232,51 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay ~/Documents/celebration.wav > /dev/null 2>&1 &"
+          }
+        ]
+      }
     ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": [],
+    "filesystem": {
+      "denyRead": [
+        "~/.ssh",
+        "~/.aws",
+        "~/.gnupg",
+        "~/.config/gh"
+      ],
+      "allowWrite": [
+        "//tmp",
+        "~/.npm",
+        "~/.cache",
+        "~/.local/share/mise"
+      ]
+    },
+    "network": {
+      "allowLocalBinding": true,
+      "allowedDomains": [
+        "registry.npmjs.org",
+        "*.npmjs.org",
+        "github.com",
+        "*.github.com",
+        "*.githubusercontent.com",
+        "registry.yarnpkg.com",
+        "api.anthropic.com"
+      ],
+      "allowUnixSockets": [],
+      "allowAllUnixSockets": false
+    }
   },
   "statusLine": {
     "type": "command",
