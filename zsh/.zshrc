@@ -8,10 +8,6 @@ _ZSHRC_ORIGINAL_PATH="${_ZSHRC_ORIGINAL_PATH:-$PATH}"
 # Path configurations
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-# Bun path
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
@@ -103,8 +99,6 @@ setopt no_flow_control # Ctrl-S, Ctrl-Q でのフロー制御を無効化
 # Local file sources
 source ~/.config/zsh/fzf.zsh 2>/dev/null
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
 # Local environment variables
 . "$HOME/.local/bin/env"
 
