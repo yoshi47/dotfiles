@@ -249,7 +249,7 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
-    "excludedCommands": ["git commit"],
+    "excludedCommands": ["git commit:*"],
     "filesystem": {
       "denyRead": [
         "~/.ssh",
