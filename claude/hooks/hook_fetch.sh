@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # PreToolUse hook - WebFetch実行前のチェック
 
 INPUT=$(cat)

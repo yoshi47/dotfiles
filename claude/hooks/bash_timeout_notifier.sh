@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Bash Timeout Notifier Hook
 # Detects when a bash command has timed out and notifies the user

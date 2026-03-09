@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # 標準入力からJSONを読み取る
 INPUT=$(cat)

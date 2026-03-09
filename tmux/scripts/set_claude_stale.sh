@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Set @claude_stale flag on Claude Code panes (identified by @running_cmd containing "claude")
 for srv in default personal; do
   for pane in $(tmux -L "$srv" list-panes -a -F '#{session_name}:#{window_index}.#{pane_index}' 2>/dev/null); do

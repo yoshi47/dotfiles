@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # PreToolUse hook - コマンド実行前のチェック
 
 INPUT=$(cat)

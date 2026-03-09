@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Switch to session based on mouse click position on status line
 
 # Get mouse click X position
