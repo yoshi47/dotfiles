@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "model": "opus",
-  "cleanupPeriodDays": 0,
+  "cleanupPeriodDays": 99999,
   "includeCoAuthoredBy": false,
   "skipDangerousModePermissionPrompt": true,
   "env": {
@@ -261,7 +261,9 @@
         "//tmp",
         "~/.npm",
         "~/.cache",
-        "~/.local/share/mise"
+        "~/.local/share/mise",
+        "~/.claude-mem",
+        "~/.claude/plugins"
       ]
     },
     "network": {
