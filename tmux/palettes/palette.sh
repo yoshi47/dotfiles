@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck shell=bash
 # Unified palette loader — auto-generated from .chezmoidata.yaml
 # Usage: source palette.sh [palette_name]
