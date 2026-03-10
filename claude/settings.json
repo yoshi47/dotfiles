@@ -1,59 +1,38 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "model": "opus",
-  "cleanupPeriodDays": 99999,
-  "includeCoAuthoredBy": false,
   "skipDangerousModePermissionPrompt": true,
+  "includeCoAuthoredBy": false,
+  "cleanupPeriodDays": 99999,
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "true"
   },
   "permissions": {
-    "defaultMode": "bypassPermissions",
+    "defaultMode": "default",
     "allow": [
-      "Bash(pnpm type-check:*)",
-      "Bash(pnpm lint:*)",
-      "Bash(pnpm test:*)",
-      "Bash(pnpm unit-test:*)",
-      "Bash(pnpm format:*)",
-      "Bash(pnpm openapi:*)",
-      "Bash(pnpm run type-check:*)",
-      "Bash(cd web && pnpm type-check:*)",
-      "Bash(npm run format:*)",
-      "Bash(npm run type-check:*)",
-      "Bash(npm test)",
-      "Bash(yarn type-check)",
-      "Bash(yarn lint)",
-      "Bash(yarn lint:*)",
-      "Bash(yarn test:*)",
-      "Bash(yarn jest:*)",
-      "Bash(yarn tsx:*)",
-      "Bash(yarn tsc:*)",
-      "Bash(yarn openapi:*)",
-      "Bash(yarn biome check:*)",
-      "Bash(yarn install)",
-      "Bash(npx tsc:*)",
-      "Bash(npx biome check:*)",
-      "Bash(npx jest:*)",
-      "Bash(NODE_OPTIONS=\"--max-old-space-size=8192\" npx tsc --noEmit --incremental)",
-      "Bash(timeout 60 pnpm test -- --testPathPattern=\"DocumentsList\" --verbose --no-watch)",
-      "Bash(timeout 60 yarn test estimates.service.spec.ts --testNamePattern=\"findOne\")",
-      "Bash(PRISMA_LOG_QUERIES=true yarn dev)",
-      "Bash(./run-knip-and-squash.sh:*)",
-      "Bash(rg:*)",
-      "Bash(grep:*)",
-      "Bash(find:*)",
+      "WebFetch(domain:*)",
+      "WebSearch",
+      "List(*)",
+      "Skill(*)",
+      "Write(/tmp/pr_body.md)",
+
       "Bash(ls:*)",
       "Bash(echo:*)",
-      "Bash(chmod:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(sed:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
       "Bash(cp:*)",
       "Bash(mv:*)",
       "Bash(mkdir:*)",
       "Bash(ln:*)",
-      "Bash(sed:*)",
-      "Bash(head:*)",
-      "Bash(tail:*)",
-      "Bash(nvm use)",
-      "Bash(nvm:*)",
+      "Bash(chmod:*)",
+      "Bash(curl:*)",
+
       "Bash(git show:*)",
       "Bash(git log:*)",
       "Bash(git add:*)",
@@ -62,6 +41,9 @@
       "Bash(git commit:*)",
       "Bash(git fetch:*)",
       "Bash(git push:*)",
+      "Bash(git cat-file:*)",
+      "Bash(git rev-parse:*)",
+
       "Bash(gh search:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr list:*)",
@@ -84,17 +66,59 @@
       "Bash(gh browse:*)",
       "Bash(gh label list:*)",
       "Bash(gh cache list:*)",
+
+      "Bash(nvm use)",
+      "Bash(nvm:*)",
+      "Bash(nodenv shell:*)",
+
+      "Bash(pnpm type-check:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm unit-test:*)",
+      "Bash(pnpm format:*)",
+      "Bash(pnpm openapi:*)",
+      "Bash(pnpm run type-check:*)",
+      "Bash(pnpm jest:*)",
+      "Bash(cd web && pnpm type-check:*)",
+      "Bash(timeout 60 pnpm test -- --testPathPattern=\"DocumentsList\" --verbose --no-watch)",
+      "Bash(timeout 120 pnpm test:*)",
+      "Bash(pnpm reset:*)",
+
+      "Bash(npm run format:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npm test)",
+
+      "Bash(yarn type-check)",
+      "Bash(yarn lint)",
+      "Bash(yarn lint:*)",
+      "Bash(yarn test:*)",
+      "Bash(yarn jest:*)",
+      "Bash(yarn tsx:*)",
+      "Bash(yarn tsc:*)",
+      "Bash(yarn openapi:*)",
+      "Bash(yarn biome check:*)",
+      "Bash(yarn install)",
+      "Bash(timeout 60 yarn test estimates.service.spec.ts --testNamePattern=\"findOne\")",
+      "Bash(PRISMA_LOG_QUERIES=true yarn dev)",
+
+      "Bash(npx tsc:*)",
+      "Bash(npx biome check:*)",
+      "Bash(npx jest:*)",
+      "Bash(NODE_OPTIONS=\"--max-old-space-size=8192\" npx tsc --noEmit --incremental)",
+
       "Bash(playwright-cli:*)",
       "Bash(npx playwright-cli:*)",
-      "WebFetch(domain:*)",
-      "WebSearch",
-      "List(*)",
-      "Skill(*)",
-      "Write(/tmp/pr_body.md)",
+      "Skill(playwright-cli)",
+      "Skill(review)",
+      "Bash(./run-knip-and-squash.sh:*)",
+      "Bash(./scripts/fetch-notion-ticket.sh:*)",
+
       "mcp__figma__get_figma_data",
       "mcp__ide__executeCode",
       "mcp__ide__getDiagnostics",
       "mcp__postgres__query",
+      "mcp__datadog__search_datadog_dashboards",
+
       "mcp__notion__API-get-self",
       "mcp__notion__API-get-users",
       "mcp__notion__API-get-block-children",
@@ -102,6 +126,7 @@
       "mcp__notion__API-post-search",
       "mcp__notion__API-retrieve-a-database",
       "mcp__notion__API-retrieve-a-page",
+
       "mcp__notionApi__API-get-self",
       "mcp__notionApi__API-get-user",
       "mcp__notionApi__API-get-users",
@@ -115,7 +140,12 @@
       "mcp__notionApi__API-list-data-source-templates",
       "mcp__notionApi__API-query-data-source",
       "mcp__notionApi__API-post-search",
+
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch",
+
       "mcp__serena__check_onboarding_performed",
+      "mcp__serena__activate_project",
       "mcp__serena__find_file",
       "mcp__serena__find_referencing_symbols",
       "mcp__serena__find_symbol",
@@ -123,25 +153,38 @@
       "mcp__serena__list_dir",
       "mcp__serena__search_for_pattern",
       "mcp__serena__write_memory",
+
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_take_screenshot",
+
       "mcp__plugin_claude-mem_mcp-search__search",
-      "mcp__claude_ai_Slack__slack_search_public_and_private"
+      "mcp__claude_ai_Slack__slack_search_public_and_private",
+      "mcp__claude_ai_Slack__slack_read_thread"
     ],
     "deny": [
       "Bash(sudo:*)",
       "Bash(rm:*)",
+      "Bash(wget:*)",
+      "Bash(nc:*)",
+      "Bash(printenv:*)",
+
       "Bash(git reset:*)",
       "Bash(git rebase:*)",
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
-      "Bash(wget:*)",
-      "Bash(nc:*)",
+
       "Bash(npm uninstall:*)",
       "Bash(npm remove:*)",
-      "Bash(printenv:*)",
+
       "Bash(psql:*)",
       "Bash(mysql:*)",
       "Bash(mongod:*)",
-      "Bash(pnpm reset:*)",
+
       "Read(.env*)",
       "Read(.envrc*)",
       "Read(id_rsa)",
@@ -150,6 +193,7 @@
       "Read(**/*_key)",
       "Write(.env*)",
       "Write(**/secrets/**)",
+
       "mcp__supabase__execute_sql",
       "mcp__notionApi__API-create-a-comment",
       "mcp__notionApi__API-create-a-data-source",
@@ -251,23 +295,23 @@
     "autoAllowBashIfSandboxed": true,
     "excludedCommands": ["git commit:*"],
     "filesystem": {
-      "denyRead": [
-        "~/.ssh",
-        "~/.aws",
-        "~/.gnupg",
-        "~/.config/gh"
-      ],
       "allowWrite": [
         "//tmp",
         "~/.npm",
         "~/.cache",
         "~/.local/share/mise",
         "~/.claude-mem",
-        "~/.claude/plugins"
+        "~/.claude/plugins",
+        "~/.work-checkpoints"
+      ],
+      "denyRead": [
+        "~/.ssh",
+        "~/.aws",
+        "~/.gnupg",
+        "~/.config/gh"
       ]
     },
     "network": {
-      "allowLocalBinding": true,
       "allowedDomains": [
         "registry.npmjs.org",
         "*.npmjs.org",
@@ -278,7 +322,8 @@
         "api.anthropic.com"
       ],
       "allowUnixSockets": [],
-      "allowAllUnixSockets": false
+      "allowAllUnixSockets": false,
+      "allowLocalBinding": true
     }
   },
   "statusLine": {
