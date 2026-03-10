@@ -9,7 +9,7 @@
     "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "true"
   },
   "permissions": {
-    "defaultMode": "default",
+    "defaultMode": "bypassPermissions",
     "allow": [
       "WebFetch(domain:*)",
       "WebSearch",
@@ -265,6 +265,15 @@
             "command": "git-ai checkpoint claude --hook-input stdin"
           }
         ]
+      },
+      {
+        "matcher": "ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/plan_review_codex.sh"
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -302,7 +311,8 @@
         "~/.local/share/mise",
         "~/.claude-mem",
         "~/.claude/plugins",
-        "~/.work-checkpoints"
+        "~/.work-checkpoints",
+        "~/.config/chezmoi"
       ],
       "denyRead": [
         "~/.ssh",
