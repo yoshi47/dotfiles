@@ -11,10 +11,12 @@ allowed-tools: Bash(git fetch:*), Bash(git pull:*), Bash(git show:*), Bash(git c
 1. commit hash(es) ($ARGUMENTS) が指定されているか確認
    - 指定されていない場合はエラーメッセージを表示して終了
    - $ARGUMENTSをスペース区切りで分割してcommit hashのリストを取得
-2. origin/masterをfetch
-3. ローカルのmasterブランチを最新化
+2. 現在のブランチ名を記録しておく
+3. ローカルのmasterブランチを最新化（必ず実行すること）
    - git checkout master && git pull origin master (masterが存在しない場合はmainを使用)
-   - 元のブランチに戻る (git checkout -)
+   - 未コミットの変更がある場合は git stash してからcheckout
+   - pullが完了したら元のブランチに戻る (git checkout {記録したブランチ名})
+   - stashした場合は git stash pop で復元
 4. 指定された全てのcommit hashが存在するか確認 (git cat-file -t または git show)
    - 存在しないcommitがある場合はエラーメッセージを表示して終了
 5. git showで全てのcommit情報を表示して、内容を確認
