@@ -178,6 +178,9 @@
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
 
+      "Bash(chezmoi apply --force:*)",
+      "Bash(chezmoi apply -f:*)",
+
       "Bash(npm uninstall:*)",
       "Bash(npm remove:*)",
 
@@ -345,13 +348,20 @@
     "work-checkpoints@work-checkpoints-plugin": true,
     "swift-lsp@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
-    "claude-mem@thedotmack": true
+    "claude-mem@thedotmack": true,
+    "conversation-search@yoshi47": true
   },
   "extraKnownMarketplaces": {
     "thedotmack": {
       "source": {
         "source": "github",
         "repo": "thedotmack/claude-mem"
+      }
+    },
+    "yoshi47": {
+      "source": {
+        "source": "github",
+        "repo": "yoshi47/ai-conversation-search"
       }
     }
   },
