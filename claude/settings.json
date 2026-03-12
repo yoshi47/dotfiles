@@ -268,15 +268,6 @@
             "command": "git-ai checkpoint claude --hook-input stdin"
           }
         ]
-      },
-      {
-        "matcher": "ExitPlanMode",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/plan_review_codex.sh"
-          }
-        ]
       }
     ],
     "UserPromptSubmit": [
@@ -286,6 +277,15 @@
           {
             "type": "command",
             "command": "~/.claude/plugins/cache/work-checkpoints-plugin/work-checkpoints/1.0.3/scripts/save-checkpoint.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/plan_review_prompt.sh"
           }
         ]
       }

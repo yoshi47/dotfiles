@@ -25,4 +25,6 @@ Replace `PLAN_FILE_PATH` with the actual path from step 1.
 
 3. Show the review result to the user.
 
+4. If Codex points out issues, fix the plan and re-run the review. Repeat until Codex responds with「問題なし」(OK).
+
 If no plan file exists, inform the user that no plan was found in `~/.claude/plans/`.
