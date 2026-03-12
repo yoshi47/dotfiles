@@ -21,10 +21,10 @@ import type { Plugin } from "@opencode-ai/plugin"
 import { dirname } from "path"
 
 // Absolute path to git-ai binary, replaced at install time by `git-ai install-hooks`
-const GIT_AI_BIN = `${process.env.HOME}/.git-ai/bin/git-ai`
+const GIT_AI_BIN = "$HOME/.git-ai/bin/git-ai"
 
 // Tools that modify files and should be tracked
-const FILE_EDIT_TOOLS = ["edit", "write"]
+const FILE_EDIT_TOOLS = ["edit", "write", "patch", "multiedit"]
 
 export const GitAiPlugin: Plugin = async (ctx) => {
   const { $ } = ctx
