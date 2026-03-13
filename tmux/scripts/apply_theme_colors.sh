@@ -81,4 +81,4 @@ tmux set -g status-format[1] "${sf1_left}${sf1_right}"
 # --- new: status-left / status-right content ---
 tmux set -g status-left "#(~/.config/tmux/scripts/status_left.sh)"
 
-tmux set -g status-right "#(~/.config/tmux/scripts/status_right.sh)"
+tmux set -g status-right "#(~/.config/tmux/plugins/tmux-continuum/scripts/continuum_save.sh)#(~/.config/tmux/scripts/status_right.sh)"
