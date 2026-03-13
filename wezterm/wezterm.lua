@@ -28,8 +28,7 @@ config.window_decorations = "TITLE | RESIZE"
 
 -- Font
 config.font = wezterm.font_with_fallback({
-  "Hack Nerd Font Mono",
-  "HackGen Console NF",
+  "PlemolJP35 Console NF",
 })
 config.font_size = 12.5
 
