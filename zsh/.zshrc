@@ -15,9 +15,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-# git-ai
-export PATH="$HOME/.git-ai/bin:$PATH"
-
 export PATH="$HOME/bin:$PATH"
 
 # Disable zsh default completion menu (required for fzf-tab)
@@ -148,3 +145,6 @@ alias claude-mem='bun "$HOME/.claude/plugins/cache/thedotmack/claude-mem/10.5.2/
 
 # Added by Antigravity
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+
+# Added by git-ai installer on Fri Mar 13 15:25:30 JST 2026
+export PATH="$HOME/.git-ai/bin:$PATH"
