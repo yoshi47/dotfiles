@@ -31,11 +31,6 @@ env_vars = ["DATABASE_URL"]
 startup_timeout_sec = 60
 
 
-[mcp_servers.claude-mem]
-command = "node"
-args = ["$HOME/.claude/plugins/marketplaces/thedotmack/plugin/scripts/mcp-server.cjs"]
-startup_timeout_sec = 60
-
 [mcp_servers.context7]
 command = "npx"
 args = ["-y", "@upstash/context7-mcp@latest"]

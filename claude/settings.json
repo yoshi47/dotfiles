@@ -161,7 +161,6 @@
       "mcp__playwright__browser_close",
       "mcp__playwright__browser_take_screenshot",
 
-      "mcp__plugin_claude-mem_mcp-search__search",
       "mcp__claude_ai_Slack__slack_search_public_and_private",
       "mcp__claude_ai_Slack__slack_read_thread"
     ],
@@ -211,16 +210,29 @@
   "hooks": {
     "Notification": [
       {
-        "matcher": "",
+        "matcher": "permission_prompt|elicitation_dialog",
         "hooks": [
           {
             "type": "command",
             "command": "afplay ~/Documents/notification.wav > /dev/null 2>&1 &"
+          },
+          {
+            "type": "command",
+            "command": "~/.config/tmux/scripts/tmux-app-alert.sh set"
           }
         ]
       }
     ],
     "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/tmux/scripts/tmux-app-alert.sh clear || true"
+          }
+        ]
+      },
       {
         "matcher": "Read",
         "hooks": [
@@ -244,7 +256,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.git-ai/bin/git-ai checkpoint claude --hook-input stdin"
+            "command": "$HOME/.git-ai/bin/git-ai checkpoint claude --hook-input stdin || true"
           }
         ]
       }
@@ -264,7 +276,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.git-ai/bin/git-ai checkpoint claude --hook-input stdin"
+            "command": "$HOME/.git-ai/bin/git-ai checkpoint claude --hook-input stdin || true"
           }
         ]
       }
@@ -324,7 +336,6 @@
         "~/.npm",
         "~/.cache",
         "~/.local/share/mise",
-        "~/.claude-mem",
         "~/.claude/plugins",
         "~/.work-checkpoints",
         "~/.config/chezmoi"
@@ -360,16 +371,9 @@
     "work-checkpoints@work-checkpoints-plugin": true,
     "swift-lsp@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
-    "claude-mem@thedotmack": true,
     "conversation-search@yoshi47": true
   },
   "extraKnownMarketplaces": {
-    "thedotmack": {
-      "source": {
-        "source": "github",
-        "repo": "thedotmack/claude-mem"
-      }
-    },
     "yoshi47": {
       "source": {
         "source": "github",
