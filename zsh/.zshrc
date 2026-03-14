@@ -148,3 +148,6 @@ export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # Added by git-ai installer on Fri Mar 13 15:25:30 JST 2026
 export PATH="$HOME/.git-ai/bin:$PATH"
+
+# LiteLLM Proxy (Claude Code with OpenAI models)
+alias claude-gpt='~/.config/litellm/start.sh'
