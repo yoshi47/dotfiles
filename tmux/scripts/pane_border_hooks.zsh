@@ -70,11 +70,14 @@ _tmux_running_cmd_precmd() {
   tmux set -put "$TMUX_PANE" @claude_stale 2>/dev/null
 
   # Clear app-waiting flag only if this pane set it (avoids multi-pane conflicts)
-  local _waiting_pane
+  local _waiting_pane _window_id
   _waiting_pane=$(tmux show-option -wqv @app_waiting_pane 2>/dev/null)
   if [[ "$_waiting_pane" == "$TMUX_PANE" ]]; then
-    tmux set-option -wu @app_waiting 2>/dev/null
-    tmux set-option -wu @app_waiting_pane 2>/dev/null
+    _window_id=$(tmux display-message -t "$TMUX_PANE" -p '#{window_id}' 2>/dev/null)
+    if [[ -n "$_window_id" ]]; then
+      tmux set-option -wut "$_window_id" @app_waiting 2>/dev/null
+      tmux set-option -wut "$_window_id" @app_waiting_pane 2>/dev/null
+    fi
   fi
 }
 
