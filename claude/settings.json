@@ -275,6 +275,15 @@
         "hooks": [
           {
             "type": "command",
+            "command": "~/.config/tmux/scripts/tmux-app-waiting.sh clear"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
             "command": "~/.claude/plugins/cache/work-checkpoints-plugin/work-checkpoints/1.0.3/scripts/save-checkpoint.sh"
           }
         ]
@@ -296,6 +305,10 @@
           {
             "type": "command",
             "command": "afplay ~/Documents/celebration.wav > /dev/null 2>&1 &"
+          },
+          {
+            "type": "command",
+            "command": "~/.config/tmux/scripts/tmux-app-waiting.sh set"
           }
         ]
       }

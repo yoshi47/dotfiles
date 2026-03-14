@@ -47,14 +47,20 @@ while IFS='|' read -r _session_index session_name session_id session_has_alert; 
 		bell_prefix="#[fg=${bell_alert_fg}]${bell_icon}#[fg=${base_fg}] "
 	fi
 
+	# Check if any window in this session has @app_waiting set
+	name_fg="${base_fg}"
+	if tmux list-windows -t "$session_name" -F '#{@app_waiting}' 2>/dev/null | grep -q '^1$'; then
+		name_fg="${THEME_GREEN}"
+	fi
+
 	if [ "$session_name" = "$current_session" ]; then
 		output+="#[fg=${base_bg},bg=${active_bg}]${SEP_RIGHT_BOLD}"
-		output+="${fmt_inverse}#[range=session|${session_id}]${bell_prefix}${session_name}#[norange]"
+		output+="${fmt_inverse}#[range=session|${session_id}]${bell_prefix}#[fg=${name_fg}]${session_name}#[fg=${base_fg}]#[norange]"
 		output+="#[fg=${active_bg},bg=${base_bg}]${SEP_RIGHT_BOLD}"
 		output+="${fmt_regular}"
 	else
 		output+="#[fg=${base_bg},bg=${base_bg}]${SEP_RIGHT_BOLD}"
-		output+="${fmt_regular}#[range=session|${session_id}]${bell_prefix}${session_name}#[norange]"
+		output+="${fmt_regular}#[range=session|${session_id}]${bell_prefix}#[fg=${name_fg}]${session_name}#[fg=${base_fg}]#[norange]"
 		output+="#[fg=${base_bg},bg=${base_bg}]${SEP_RIGHT_BOLD}"
 		output+="${fmt_regular}"
 	fi

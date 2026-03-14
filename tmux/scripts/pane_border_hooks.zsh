@@ -68,6 +68,14 @@ _tmux_running_cmd_precmd() {
 
   # Clear claude stale flag when returning to shell (e.g. after /exit from Claude Code)
   tmux set -put "$TMUX_PANE" @claude_stale 2>/dev/null
+
+  # Clear app-waiting flag only if this pane set it (avoids multi-pane conflicts)
+  local _waiting_pane
+  _waiting_pane=$(tmux show-option -wqv @app_waiting_pane 2>/dev/null)
+  if [[ "$_waiting_pane" == "$TMUX_PANE" ]]; then
+    tmux set-option -wu @app_waiting 2>/dev/null
+    tmux set-option -wu @app_waiting_pane 2>/dev/null
+  fi
 }
 
 # chpwd: called when PWD changes.
