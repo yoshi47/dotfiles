@@ -32,8 +32,7 @@ if tmux -L personal list-sessions &>/dev/null; then
   # Server exists — just attach
   exec tmux -L personal attach-session -t personal
 else
-  # New server — start, restore saved sessions, then attach
+  # New server — start and attach (restore is handled by continuum_force_autorestore.sh in tmux.conf)
   tmux -L personal -f ~/.config/tmux/tmux.personal.conf new-session -d -s personal
-  tmux -L personal run-shell ~/.config/tmux/plugins/tmux-resurrect/scripts/restore.sh
   exec tmux -L personal attach-session -t personal
 fi

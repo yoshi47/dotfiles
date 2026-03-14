@@ -22,9 +22,5 @@ if [ $? -ne 0 ]; then
   exec zsh
 fi
 
-RESTORE=~/.config/tmux/plugins/tmux-resurrect/scripts/restore.sh
-if [ -x "$RESTORE" ]; then
-  tmux -L personal run-shell "$RESTORE"
-fi
-
+# Restore is handled by continuum_force_autorestore.sh in tmux.conf
 exec tmux -L personal attach-session -t personal
