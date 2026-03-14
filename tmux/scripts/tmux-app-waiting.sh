@@ -19,12 +19,14 @@ case "${1:-}" in
   set)
     tmux set-option -wt "$window" @app_waiting 1 2>/dev/null
     tmux set-option -wt "$window" @app_waiting_pane "$pane" 2>/dev/null
+    tmux refresh-client -S 2>/dev/null
     ;;
   clear)
     owner=$(tmux show-option -wqvt "$window" @app_waiting_pane 2>/dev/null)
     if [ -z "$owner" ] || [ "$owner" = "$pane" ]; then
       tmux set-option -wut "$window" @app_waiting 2>/dev/null
       tmux set-option -wut "$window" @app_waiting_pane 2>/dev/null
+      tmux refresh-client -S 2>/dev/null
     fi
     ;;
   *)
