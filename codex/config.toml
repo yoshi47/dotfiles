@@ -1,5 +1,6 @@
 
 notify = ["bash", "-lc", "$HOME/.git-ai/bin/git-ai checkpoint codex --hook-input & afplay ~/Documents/celebration.wav"]
+personality = "friendly"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 approval_policy = "on-request"
