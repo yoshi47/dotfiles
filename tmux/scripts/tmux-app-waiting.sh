@@ -21,8 +21,11 @@ case "${1:-}" in
     tmux set-option -wt "$window" @app_waiting_pane "$pane" 2>/dev/null
     ;;
   clear)
-    tmux set-option -wut "$window" @app_waiting 2>/dev/null
-    tmux set-option -wut "$window" @app_waiting_pane 2>/dev/null
+    owner=$(tmux show-option -wqvt "$window" @app_waiting_pane 2>/dev/null)
+    if [ -z "$owner" ] || [ "$owner" = "$pane" ]; then
+      tmux set-option -wut "$window" @app_waiting 2>/dev/null
+      tmux set-option -wut "$window" @app_waiting_pane 2>/dev/null
+    fi
     ;;
   *)
     echo "Usage: $0 set|clear" >&2; exit 1

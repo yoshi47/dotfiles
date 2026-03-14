@@ -47,9 +47,13 @@ while IFS='|' read -r _session_index session_name session_id session_has_alert; 
 		bell_prefix="#[fg=${bell_alert_fg}]${bell_icon}#[fg=${base_fg}] "
 	fi
 
-	# Check if any window in this session has @app_waiting set
+	# Check if any window in this session has @app_alert or @app_waiting set
+	# Priority: alert (yellow) > waiting (green) > normal
 	name_fg="${base_fg}"
-	if tmux list-windows -t "$session_name" -F '#{@app_waiting}' 2>/dev/null | grep -q '^1$'; then
+	local_flags=$(tmux list-windows -t "$session_name" -F '#{@app_alert}|#{@app_waiting}' 2>/dev/null)
+	if echo "$local_flags" | grep -q '^1|'; then
+		name_fg="${THEME_YELLOW}"
+	elif echo "$local_flags" | grep -q '|1$'; then
 		name_fg="${THEME_GREEN}"
 	fi
 

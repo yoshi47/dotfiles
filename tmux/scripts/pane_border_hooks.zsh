@@ -69,15 +69,17 @@ _tmux_running_cmd_precmd() {
   # Clear claude stale flag when returning to shell (e.g. after /exit from Claude Code)
   tmux set -put "$TMUX_PANE" @claude_stale 2>/dev/null
 
-  # Clear app-waiting flag only if this pane set it (avoids multi-pane conflicts)
-  local _waiting_pane _window_id
-  _waiting_pane=$(tmux show-option -wqv @app_waiting_pane 2>/dev/null)
-  if [[ "$_waiting_pane" == "$TMUX_PANE" ]]; then
-    _window_id=$(tmux display-message -t "$TMUX_PANE" -p '#{window_id}' 2>/dev/null)
-    if [[ -n "$_window_id" ]]; then
-      tmux set-option -wut "$_window_id" @app_waiting 2>/dev/null
-      tmux set-option -wut "$_window_id" @app_waiting_pane 2>/dev/null
-    fi
+  # Clear app-waiting / app-alert flags if this pane set them (TUI exited)
+  local _window_id _flag_pane _flag
+  _window_id=$(tmux display-message -t "$TMUX_PANE" -p '#{window_id}' 2>/dev/null)
+  if [[ -n "$_window_id" ]]; then
+    for _flag in app_waiting app_alert; do
+      _flag_pane=$(tmux show-option -wqvt "$_window_id" @${_flag}_pane 2>/dev/null)
+      if [[ "$_flag_pane" == "$TMUX_PANE" ]]; then
+        tmux set-option -wut "$_window_id" @${_flag} 2>/dev/null
+        tmux set-option -wut "$_window_id" @${_flag}_pane 2>/dev/null
+      fi
+    done
   fi
 }
 

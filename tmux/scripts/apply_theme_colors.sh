@@ -43,19 +43,18 @@ wc=""
 wc+="#[fg=${THEME_SURFACE},bg=${THEME_OVERLAY},${FMT_OPTS}]"
 wc+="${SEP_RIGHT_BOLD}"
 wc+="#[fg=${THEME_TEXT},bg=${THEME_OVERLAY},${FMT_OPTS}]"
-wc+=" #I ${SEP_RIGHT_THIN} #{?window_zoomed_flag,#{?#{pane_mode},, },}#{?#{@app_waiting},#[fg=${THEME_GREEN}]#W#[fg=${THEME_TEXT}],#W} "
+wc+=" #I ${SEP_RIGHT_THIN} #{?window_zoomed_flag,#{?#{pane_mode},, },}#{?#{@app_alert},#[fg=${THEME_YELLOW}]#W#[fg=${THEME_TEXT}],#{?#{@app_waiting},#[fg=${THEME_GREEN}]#W#[fg=${THEME_TEXT}],#W}} "
 wc+="#[fg=${THEME_OVERLAY},bg=${THEME_SURFACE},${FMT_OPTS}]"
 wc+="${SEP_RIGHT_BOLD}"
 tmux set -g window-status-current-format "$wc"
 
-# Non-current window: flat on surface (invisible bold sep for alignment)
-# Bell windows get TEXT background with OVERLAY text to indicate notification
+# Non-current window: flat on surface
 wf=""
-wf+="#{?window_bell_flag,#[fg=${THEME_SURFACE}]#[bg=${THEME_TEXT}],#[fg=${THEME_SURFACE}]#[bg=${THEME_SURFACE}]}#[${FMT_OPTS}]"
+wf+="#[fg=${THEME_SURFACE},bg=${THEME_SURFACE}]#[${FMT_OPTS}]"
 wf+="${SEP_RIGHT_BOLD}"
-wf+="#{?window_bell_flag,#[fg=${THEME_OVERLAY}]#[bg=${THEME_TEXT}],#[fg=${THEME_TEXT}]#[bg=${THEME_SURFACE}]}#[${FMT_OPTS}]"
-wf+=" #I ${SEP_RIGHT_THIN} #{?window_zoomed_flag,#{?#{pane_mode},, },}#{?#{@app_waiting},#[fg=${THEME_GREEN}]#W#[fg=${THEME_TEXT}],#W} "
-wf+="#{?window_bell_flag,#[fg=${THEME_TEXT}],#[fg=${THEME_SURFACE}]}#[bg=${THEME_SURFACE}]#[${FMT_OPTS}]"
+wf+="#[fg=${THEME_TEXT},bg=${THEME_SURFACE}]#[${FMT_OPTS}]"
+wf+=" #I ${SEP_RIGHT_THIN} #{?window_zoomed_flag,#{?#{pane_mode},, },}#{?#{@app_alert},#[fg=${THEME_YELLOW}]#W#[fg=${THEME_TEXT}],#{?#{@app_waiting},#[fg=${THEME_GREEN}]#W#[fg=${THEME_TEXT}],#W}} "
+wf+="#[fg=${THEME_SURFACE}]#[bg=${THEME_SURFACE}]#[${FMT_OPTS}]"
 wf+="${SEP_RIGHT_BOLD}"
 tmux set -g window-status-format "$wf"
 
