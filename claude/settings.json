@@ -371,7 +371,8 @@
     "work-checkpoints@work-checkpoints-plugin": true,
     "swift-lsp@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
-    "conversation-search@yoshi47": true
+    "conversation-search@yoshi47": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "yoshi47": {
