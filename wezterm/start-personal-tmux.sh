@@ -12,10 +12,12 @@ if [ ! -f "$CONF" ]; then
   exec zsh
 fi
 
-if tmux -L personal list-sessions 2>/dev/null; then
+# If the personal session already exists, just attach
+if tmux -L personal has-session -t personal 2>/dev/null; then
   exec tmux -L personal attach-session -t personal
 fi
 
+# Create a new session and attach
 tmux -L personal -f "$CONF" new-session -d -s personal
 if [ $? -ne 0 ]; then
   echo 'ERROR: Failed to create tmux session'
