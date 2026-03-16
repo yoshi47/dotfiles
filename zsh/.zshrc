@@ -5,9 +5,6 @@ if [[ -n $_ZSHRC_LOADED ]]; then
 fi
 _ZSHRC_ORIGINAL_PATH="${_ZSHRC_ORIGINAL_PATH:-$PATH}"
 
-# Path configurations
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
@@ -97,7 +94,7 @@ setopt no_flow_control # Ctrl-S, Ctrl-Q でのフロー制御を無効化
 source ~/.config/zsh/fzf.zsh 2>/dev/null
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 # Local environment variables
-. "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 # Aliases
 alias rm='rmtrash'
@@ -151,3 +148,8 @@ export PATH="$HOME/.git-ai/bin:$PATH"
 
 # LiteLLM Proxy (Claude Code with OpenAI models)
 alias claude-gpt='~/.config/litellm/start.sh'
+
+# Nix (after Homebrew and mise so Nix takes PATH priority)
+if [[ -d "$HOME/.nix-profile/bin" ]]; then
+  export PATH="$HOME/.nix-profile/bin:$PATH"
+fi
