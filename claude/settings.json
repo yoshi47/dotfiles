@@ -316,11 +316,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay ~/Documents/celebration.wav > /dev/null 2>&1 &"
+            "command": "~/.claude/hooks/stop_main_only.sh afplay ~/Documents/celebration.wav"
           },
           {
             "type": "command",
-            "command": "~/.config/tmux/scripts/tmux-app-waiting.sh set"
+            "command": "~/.claude/hooks/stop_main_only.sh ~/.config/tmux/scripts/tmux-app-waiting.sh set"
           }
         ]
       }
@@ -372,7 +372,8 @@
     "swift-lsp@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
     "conversation-search@yoshi47": true,
-    "rust-analyzer-lsp@claude-plugins-official": true
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "yoshi47": {
