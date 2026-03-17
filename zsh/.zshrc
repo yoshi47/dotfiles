@@ -112,6 +112,20 @@ alias memos-db='scp memos:/var/opt/memos/memos_prod.db ~/memos.db && open -a "Be
 alias pw-work='npx playwright open --user-data-dir=~/.playwright/profiles/work'
 alias pw-private='npx playwright open --user-data-dir=~/.playwright/profiles/private'
 
+# OrbStack VM (personal environment with isolated Claude Code insights)
+# Detach from host tmux first so the VM's tmux runs as a standalone session (not nested).
+# On exit from the VM, automatically reattach to the host tmux "main" session.
+personal() {
+  if [[ -n "$TMUX" ]]; then
+    local sock session
+    sock="$(tmux display-message -p '#{socket_path}')"
+    session="$(tmux display-message -p '#{session_name}')"
+    tmux detach-client -E "orb shell -m personal; tmux -S '$sock' attach -t '$session'"
+  else
+    orb shell -m personal
+  fi
+}
+
 COMPLETION_WAITING_DOTS="true"
 
 # Docker Desktop completions
@@ -153,3 +167,4 @@ alias claude-gpt='~/.config/litellm/start.sh'
 if [[ -d "$HOME/.nix-profile/bin" ]]; then
   export PATH="$HOME/.nix-profile/bin:$PATH"
 fi
+export PATH="$HOME/.local/bin:$PATH"
