@@ -222,25 +222,11 @@ config.keys = {
     mods = "SHIFT",
     action = act.SendString("\x1b\r"),
   },
-  -- Cmd+N: cycle through workspaces (creates personal on first use)
+  -- Cmd+N: cycle through workspaces
   {
     key = "n",
     mods = "CMD",
-    action = wezterm.action_callback(function(window, pane)
-      local workspaces = wezterm.mux.get_workspace_names() or {}
-      local has_personal = false
-      for _, name in ipairs(workspaces) do
-        if name == "personal" then
-          has_personal = true
-          break
-        end
-      end
-      if not has_personal then
-        switch_workspace(window, pane, "personal")
-      else
-        window:perform_action(act.SwitchWorkspaceRelative(1), pane)
-      end
-    end),
+    action = act.SwitchWorkspaceRelative(1),
   },
   -- Cmd+O: workspace picker — local tmux, SSH, OrbStack VMs, Docker containers
   {
