@@ -53,9 +53,11 @@ smartcache eval mise activate zsh
 smartcache eval zoxide init zsh
 smartcache eval direnv hook zsh
 
-# starship - select theme config based on tmux palette
-if [[ -n "$TMUX_THEME_PALETTE" && "$TMUX_THEME_PALETTE" != "dracula" ]]; then
-  export STARSHIP_CONFIG="$HOME/.config/starship_personal.toml"
+# starship - select per-palette config
+_tmux_palette="${TMUX_THEME_PALETTE:-dracula}"
+if [[ "$_tmux_palette" != "dracula" ]]; then
+  _sc="$HOME/.config/starship-${_tmux_palette}.toml"
+  [[ -f "$_sc" ]] && export STARSHIP_CONFIG="$_sc"
 fi
 
 # starship - cached for faster startup (per palette)
@@ -129,9 +131,10 @@ fi
 # tmux pane border integration (dir / git / running command)
 [ -f ~/.config/tmux/scripts/pane_border_hooks.zsh ] && source ~/.config/tmux/scripts/pane_border_hooks.zsh
 
-# yazi - select theme config based on tmux palette (like starship above)
-if [[ -n "$TMUX_THEME_PALETTE" && "$TMUX_THEME_PALETTE" != "dracula" ]]; then
-  export YAZI_CONFIG_HOME="$HOME/.config/yazi-personal"
+# yazi - select per-palette config
+if [[ "$_tmux_palette" != "dracula" ]]; then
+  _yc="$HOME/.config/yazi-${_tmux_palette}"
+  [[ -d "$_yc" ]] && export YAZI_CONFIG_HOME="$_yc"
 fi
 
 # yazi wrapper: reset tmux pane_current_path after exit

@@ -3,14 +3,27 @@ local act = wezterm.action
 
 local config = wezterm.config_builder()
 
--- Per-workspace theme overrides.
--- Workspaces not listed here use the default color_scheme.
-local workspace_config = {
-  personal = {
-    wezterm_theme = "Monokai (base16)",
-    tmux_palette = "monokai",
-  },
+-- Palette name → wezterm color_scheme (from chezmoidata)
+local palette_to_wezterm = {
+  ["catppuccin_mocha"] = "Catppuccin Mocha",
+  ["dracula"] = "Dracula (Official)",
+  ["monokai"] = "Monokai (base16)",
+  ["tokyo_night"] = "Tokyo Night",
 }
+
+-- Determine wezterm theme for a workspace name
+local function workspace_theme(name)
+  -- OrbStack VMs → linux default theme
+  if name:find("^orb:") then
+    return palette_to_wezterm["monokai"]
+  end
+  -- Default workspace and remote workspaces (ssh:, docker:, etc.) use the base color_scheme
+  if name == "default" or name:find(":") then
+    return nil
+  end
+  -- Local tmux socket named after a palette (e.g. "tokyo_night")
+  return palette_to_wezterm[name]
+end
 
 -- Validate workspace name: alphanumeric, dash, underscore only
 local function valid_workspace_name(name)
@@ -135,13 +148,7 @@ end
 -- Build spawn args for a tmux socket
 local function tmux_spawn(socket_name)
   local session = socket_name == "default" and "main" or socket_name
-  local conf = workspace_config[socket_name] or {}
-  local env = {}
-  if conf.tmux_palette then
-    env.TMUX_THEME_PALETTE = conf.tmux_palette
-  end
   return {
-    set_environment_variables = env,
     args = {
       "/bin/zsh", "-l", "-c",
       string.format("~/.config/wezterm/start-tmux.sh '%s' '%s'", socket_name, session),
@@ -164,9 +171,7 @@ end
 
 -- General
 config.automatically_reload_config = true
-local default_spawn = tmux_spawn("default")
-config.default_prog = default_spawn.args
-config.set_environment_variables = default_spawn.set_environment_variables
+config.default_prog = tmux_spawn("default").args
 config.window_close_confirmation = "NeverPrompt"
 config.front_end = "WebGpu"
 config.max_fps = 120
@@ -199,13 +204,10 @@ config.audible_bell = "SystemBeep"
 -- Hyperlinks (Cmd+Click to open)
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
 
--- Apply per-workspace theme overrides from workspace_config
+-- Apply per-workspace theme overrides
 wezterm.on("update-status", function(window)
   local overrides = window:get_config_overrides() or {}
-  local workspace = window:active_workspace()
-  local conf = workspace_config[workspace]
-  local desired = conf and conf.wezterm_theme or nil
-
+  local desired = workspace_theme(window:active_workspace())
   if overrides.color_scheme ~= desired then
     overrides.color_scheme = desired
     window:set_config_overrides(overrides)
