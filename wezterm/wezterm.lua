@@ -52,7 +52,7 @@ local function parse_ssh_hosts()
   return hosts
 end
 
--- OrbStack VM detector
+-- OrbStack VM detector (returns list of {name, user} tables)
 local function list_orb_vms()
   local vms = {}
   local ok, out = wezterm.run_child_process({ "/usr/local/bin/orb", "list", "-f", "json" })
@@ -65,7 +65,8 @@ local function list_orb_vms()
   end
   for _, vm in ipairs(data) do
     if vm.state == "running" then
-      table.insert(vms, vm.name)
+      local user = vm.config and vm.config.default_username or nil
+      table.insert(vms, { name = vm.name, user = user })
     end
   end
   return vms
@@ -80,10 +81,11 @@ local function ssh_spawn(host)
   }
 end
 
-local function orb_spawn(vm_name)
+local function orb_spawn(vm_name, user)
+  local user_flag = (user and valid_remote_target(user)) and string.format("-u '%s' ", user) or ""
   return {
     args = { "/bin/zsh", "-l", "-c",
-      string.format("orb -m '%s' bash -lc 'command -v tmux >/dev/null && exec tmux new-session -A -s main || exec $SHELL -l'", vm_name) },
+      string.format("orb run -m '%s' %sbash -lc 'command -v tmux >/dev/null && exec tmux new-session -A -s main || exec $SHELL -l'", vm_name, user_flag) },
   }
 end
 
@@ -97,11 +99,10 @@ end
 -- Remote spawn dispatch table: prefix → spawn function
 local remote_spawners = {
   ["ssh:"] = ssh_spawn,
-  ["orb:"] = orb_spawn,
 }
 
 -- Docker: detect containers lazily via sub-picker to avoid blocking GUI
-local function show_docker_picker(window, pane)
+local function show_docker_picker(window)
   local ok, out = wezterm.run_child_process({ "/Applications/OrbStack.app/Contents/MacOS/xbin/docker", "ps", "--format", "{{.Names}}" })
   if not ok or out == "" then
     wezterm.log_warn("No running Docker containers found")
@@ -116,18 +117,18 @@ local function show_docker_picker(window, pane)
       title = "Docker containers",
       choices = choices,
       fuzzy = true,
-      action = wezterm.action_callback(function(w, p, id)
+      action = wezterm.action_callback(function(w, _p, id)
         if not id then return end
         local container = id:sub(#"docker:" + 1)
         if valid_remote_target(container) then
           w:perform_action(
             act.SwitchToWorkspace({ name = id, spawn = docker_spawn(container) }),
-            p
+            w:mux_window():active_pane()
           )
         end
       end),
     }),
-    pane
+    window:mux_window():active_pane()
   )
 end
 
@@ -149,7 +150,9 @@ local function tmux_spawn(socket_name)
 end
 
 -- Switch to a workspace, starting its tmux socket if needed
-local function switch_workspace(window, pane, name)
+local function switch_workspace(window, _pane, name)
+  -- Use fresh active pane — captured pane may become stale after InputSelector
+  local pane = window:mux_window():active_pane()
   window:perform_action(
     act.SwitchToWorkspace({
       name = name,
@@ -281,8 +284,10 @@ config.keys = {
 
         -- OrbStack VMs
         local vms = list_orb_vms()
+        local orb_users = {}
         for _, vm in ipairs(vms) do
-          add(pad(vm, NAME_W) .. pad("", 10) .. "[orb]", "orb:" .. vm)
+          orb_users[vm.name] = vm.user
+          add(pad(vm.name, NAME_W) .. pad("", 10) .. "[orb]", "orb:" .. vm.name)
         end
 
         -- Docker containers (lazy — opens sub-picker to avoid blocking)
@@ -296,53 +301,71 @@ config.keys = {
             title = "Workspaces",
             choices = choices,
             fuzzy = true,
-            action = wezterm.action_callback(function(inner_window, inner_pane, id)
+            action = wezterm.action_callback(function(inner_window, _inner_pane, id)
               if not id then return end
 
               if id == "__new__" then
                 inner_window:perform_action(
                   act.PromptInputLine({
                     description = "New workspace name (= tmux socket name):",
-                    action = wezterm.action_callback(function(w, p, line)
+                    action = wezterm.action_callback(function(w, _p, line)
                       if not valid_workspace_name(line) then
                         wezterm.log_warn("Invalid workspace name: " .. tostring(line))
                         return
                       end
-                      switch_workspace(w, p, line)
+                      switch_workspace(w, nil, line)
                     end),
                   }),
-                  inner_pane
+                  inner_window:mux_window():active_pane()
                 )
               elseif id == "__docker__" then
-                show_docker_picker(inner_window, inner_pane)
+                show_docker_picker(inner_window)
               else
                 -- Check remote spawners
                 local handled = false
-                for prefix, spawner in pairs(remote_spawners) do
-                  if id:sub(1, #prefix) == prefix then
-                    local target = id:sub(#prefix + 1)
-                    if valid_remote_target(target) then
-                      inner_window:perform_action(
-                        act.SwitchToWorkspace({
-                          name = id,
-                          spawn = spawner(target),
-                        }),
-                        inner_pane
-                      )
-                    else
-                      wezterm.log_warn("Invalid remote target: " .. tostring(target))
+                -- OrbStack VMs (need user param)
+                local orb_prefix = "orb:"
+                if id:sub(1, #orb_prefix) == orb_prefix then
+                  local vm_name = id:sub(#orb_prefix + 1)
+                  if valid_remote_target(vm_name) then
+                    inner_window:perform_action(
+                      act.SwitchToWorkspace({
+                        name = id,
+                        spawn = orb_spawn(vm_name, orb_users[vm_name]),
+                      }),
+                      inner_window:mux_window():active_pane()
+                    )
+                  end
+                  handled = true
+                end
+                -- Other remote spawners (ssh, etc.)
+                if not handled then
+                  for prefix, spawner in pairs(remote_spawners) do
+                    if id:sub(1, #prefix) == prefix then
+                      local target = id:sub(#prefix + 1)
+                      if valid_remote_target(target) then
+                        inner_window:perform_action(
+                          act.SwitchToWorkspace({
+                            name = id,
+                            spawn = spawner(target),
+                          }),
+                          inner_window:mux_window():active_pane()
+                        )
+                      else
+                        wezterm.log_warn("Invalid remote target: " .. tostring(target))
+                      end
+                      handled = true
+                      break
                     end
-                    handled = true
-                    break
                   end
                 end
                 if not handled then
-                  switch_workspace(inner_window, inner_pane, id)
+                  switch_workspace(inner_window, nil, id)
                 end
               end
             end),
           }),
-          pane
+          window:mux_window():active_pane()
         )
       end)
       if not ok then
