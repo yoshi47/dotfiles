@@ -15,6 +15,7 @@ SEGS=(
 	"seg_mem.sh|${THEME_CYAN}"
 	"seg_battery.sh|${THEME_PINK}"
 	"seg_weather.sh|${THEME_ORANGE}"
+	"seg_hostname.sh|${THEME_PURPLE}"
 )
 
 output=""
