@@ -243,6 +243,16 @@
         ]
       },
       {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/sonar-secrets/build-scripts/pretool-secrets.sh",
+            "timeout": 60
+          }
+        ]
+      },
+      {
         "matcher": "WebFetch",
         "hooks": [
           {
@@ -306,6 +316,16 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/plan_review_prompt.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/sonar-secrets/build-scripts/prompt-secrets.sh",
+            "timeout": 60
           }
         ]
       }
