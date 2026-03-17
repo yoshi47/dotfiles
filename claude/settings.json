@@ -214,7 +214,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay ~/Documents/notification.wav > /dev/null 2>&1 &"
+            "command": "~/.agents/sounds/play.sh ~/.agents/sounds/notification.wav > /dev/null 2>&1 &"
           },
           {
             "type": "command",
@@ -336,7 +336,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/stop_main_only.sh afplay ~/Documents/celebration.wav"
+            "command": "~/.claude/hooks/stop_main_only.sh ~/.agents/sounds/play.sh ~/.agents/sounds/celebration.wav"
           },
           {
             "type": "command",
