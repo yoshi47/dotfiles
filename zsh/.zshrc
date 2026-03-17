@@ -14,6 +14,11 @@ esac
 
 export PATH="$HOME/bin:$PATH"
 
+# Nix (early — needed by sheldon/smartcache which depend on Nix-installed tools)
+if [[ -d "$HOME/.nix-profile/bin" ]]; then
+  export PATH="$HOME/.nix-profile/bin:$PATH"
+fi
+
 # Disable zsh default completion menu (required for fzf-tab)
 # Must be set before compinit to override /etc/zshrc defaults
 zstyle ':completion:*' menu no
@@ -86,8 +91,7 @@ setopt hist_expire_dups_first # 重複するコマンドラインは古い方か
 setopt hist_find_no_dups # ヒストリの検索時に重複を無視する
 setopt hist_no_store # history コマンド自体はヒストリに追加しない
 setopt extended_history # タイムスタンプ情報を保存する
-# setopt inc_append_history # 即座にヒストリファイルに追加する
-# setopt share_history # ターミナル間でヒストリを共有する
+setopt share_history # ターミナル間・マシン間でヒストリを共有する
 setopt no_flow_control # Ctrl-S, Ctrl-Q でのフロー制御を無効化
 
 # Local file sources
@@ -148,11 +152,6 @@ export PATH="$HOME/.git-ai/bin:$PATH"
 
 # LiteLLM Proxy (Claude Code with OpenAI models)
 alias claude-gpt='~/.config/litellm/start.sh'
-
-# Nix (after Homebrew and mise so Nix takes PATH priority)
-if [[ -d "$HOME/.nix-profile/bin" ]]; then
-  export PATH="$HOME/.nix-profile/bin:$PATH"
-fi
 
 # Added by sonarqube-cli installer
 export PATH="$HOME/.local/share/sonarqube-cli/bin:$PATH"
