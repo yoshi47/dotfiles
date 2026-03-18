@@ -14,10 +14,7 @@ esac
 
 export PATH="$HOME/bin:$PATH"
 
-# Nix (early — needed by sheldon/smartcache which depend on Nix-installed tools)
-if [[ -d "$HOME/.nix-profile/bin" ]]; then
-  export PATH="$HOME/.nix-profile/bin:$PATH"
-fi
+# Nix: PATH is set in .zprofile (before smartcache caches mise's PATH output)
 
 # Disable zsh default completion menu (required for fzf-tab)
 # Must be set before compinit to override /etc/zshrc defaults
