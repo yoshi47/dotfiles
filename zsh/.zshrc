@@ -14,7 +14,14 @@ esac
 
 export PATH="$HOME/bin:$PATH"
 
-# Nix: PATH is set in .zprofile (before smartcache caches mise's PATH output)
+# Nix: also in .zprofile for login shells; needed here for non-login shells
+# (Claude Code, VS Code terminal, etc.) that don't source .zprofile
+if [[ -d "$HOME/.nix-profile/bin" ]]; then
+  case ":$PATH:" in
+    *":$HOME/.nix-profile/bin:"*) ;;
+    *) export PATH="$HOME/.nix-profile/bin:$PATH" ;;
+  esac
+fi
 
 # Disable zsh default completion menu (required for fzf-tab)
 # Must be set before compinit to override /etc/zshrc defaults
