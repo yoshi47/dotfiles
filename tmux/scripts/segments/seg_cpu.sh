@@ -7,7 +7,16 @@ source "$(dirname "$0")/../common.sh" || exit 1
 icon="$(tmux_icon cpu) "
 
 if shell_is_linux; then
-	cpu_idle=$(top -b -n 1 | grep 'Cpu(s)' | grep -o "[0-9]\+\(\.[0-9]\+\)\? *id\(le\)?" | awk '{ print $1 }')
+	# /proc/stat gives cumulative CPU ticks; sample twice 0.5s apart for accuracy
+	read_cpu_ticks() { awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5}' /proc/stat; }
+	read -r total1 idle1 <<< "$(read_cpu_ticks)"
+	sleep 0.5
+	read -r total2 idle2 <<< "$(read_cpu_ticks)"
+	dt=$((total2 - total1))
+	di=$((idle2 - idle1))
+	if [ "$dt" -gt 0 ]; then
+		cpu_idle=$(awk -v di="$di" -v dt="$dt" 'BEGIN { printf "%.1f", 100 * di / dt }')
+	fi
 elif shell_is_macos; then
 	cpu_idle=$(top -l 1 -n 0 | grep 'CPU usage:' | sed 's/CPU usage: //' | awk '{print $5}' | sed 's/%//')
 else

@@ -67,7 +67,8 @@ else
 fi
 
 if [ -z "$battery_status" ]; then
-	echo "$ADAPTER --%"
+	# No battery detected (e.g. VM or desktop) — show nothing
+	exit 0
 else
 	echo "${battery_status}%"
 fi
