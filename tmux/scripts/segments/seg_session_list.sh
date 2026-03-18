@@ -3,7 +3,8 @@
 # Output: raw tmux format string.
 
 # shellcheck disable=SC1091
-source "$(dirname "$0")/../common.sh" || exit 1
+SEP_RIGHT_BOLD="" SEP_RIGHT_THIN="" SEP_LEFT_BOLD="" SEP_LEFT_THIN=""
+source "$(dirname "$0")/../common.sh" 2>/dev/null
 
 current_session=$(tmux display-message -p '#S')
 

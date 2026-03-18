@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 # Shared helpers for tmux status scripts.
 # Sources the palette and provides separator constants + platform detection.
+# パレットが見つからない場合は色なしで動作する（アイコン・セパレータは維持）。
 
 # shellcheck disable=SC1091
-if ! source "$HOME/.config/tmux/palettes/palette.sh" 2>/dev/null; then
-	echo "[common.sh] ERROR: palette.sh not found" >&2
-	return 1 2>/dev/null || exit 1
-fi
+source "$HOME/.config/tmux/palettes/palette.sh" 2>/dev/null
 
 seg_log() {
 	local level="$1" msg="$2"
@@ -18,8 +16,11 @@ seg_log() {
 }
 
 if [ -z "$THEME_TEXT" ]; then
-	seg_log warn "palette not loaded (THEME_TEXT empty)"
-	return 1 2>/dev/null || exit 1
+	seg_log warn "palette not loaded — running without colors"
+	# テーマ変数を空文字にフォールバック
+	THEME_BASE="" THEME_TEXT="" THEME_SURFACE="" THEME_OVERLAY=""
+	THEME_GREEN="" THEME_CYAN="" THEME_PINK="" THEME_ORANGE=""
+	THEME_PURPLE="" THEME_YELLOW="" THEME_BLUE="" THEME_RED=""
 fi
 
 # Powerline separators (patched font assumed)
@@ -41,6 +42,8 @@ tmux_icon() {
 		cpu) echo "󰍛" ;;
 
 		mem) echo "󰘚" ;;
+
+		hostname) echo "󰍹" ;;
 
 		battery_full) echo "󱊣" ;;
 		battery_med) echo "󱊢" ;;

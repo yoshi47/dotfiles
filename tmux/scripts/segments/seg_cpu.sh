@@ -2,7 +2,11 @@
 # Print total CPU usage as a percentage (plain text).
 
 # shellcheck disable=SC1091
-source "$(dirname "$0")/../common.sh" || exit 1
+shell_is_macos() { [ "$(uname)" = "Darwin" ]; }
+shell_is_linux() { [ "$(uname)" = "Linux" ]; }
+tmux_icon() { case "$1" in cpu) echo "CPU" ;; esac; }
+seg_log() { :; }
+source "$(dirname "$0")/../common.sh" 2>/dev/null
 
 icon="$(tmux_icon cpu) "
 

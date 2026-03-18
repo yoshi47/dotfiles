@@ -3,7 +3,8 @@
 
 SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck disable=SC1091
-source "$(dirname "$0")/../common.sh" || exit 1
+SEP_RIGHT_BOLD="" SEP_RIGHT_THIN="" SEP_LEFT_BOLD="" SEP_LEFT_THIN=""
+source "$(dirname "$0")/../common.sh" 2>/dev/null
 
 _seg_log=/tmp/tmux-segments.log
 # Truncate log if over 100KB to prevent unbounded growth

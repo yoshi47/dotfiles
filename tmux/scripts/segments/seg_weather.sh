@@ -3,8 +3,14 @@
 # Outputs plain text (icon + temp) like other segments. Silent on failure.
 
 # shellcheck disable=SC1091
-source "$(dirname "$0")/../common.sh" || exit 1
-
+tmux_icon() {
+	case "$1" in weather_clear) echo "*" ;; weather_cloud) echo "~" ;;
+		weather_rain) echo "R" ;; weather_snow) echo "S" ;;
+		weather_thunder) echo "!" ;; weather_fog) echo "=" ;;
+		weather_*|*) echo "?" ;; esac
+}
+seg_log() { :; }
+source "$(dirname "$0")/../common.sh" 2>/dev/null
 CACHE_FILE="/tmp/tmux-weather.cache"
 COORDS_CACHE="/tmp/tmux-weather-coords.cache"
 CACHE_TTL=900  # 15 minutes

@@ -2,7 +2,14 @@
 # Print battery status as percentage (plain text).
 
 # shellcheck disable=SC1091
-source "$(dirname "$0")/../common.sh" || exit 1
+shell_is_macos() { [ "$(uname)" = "Darwin" ]; }
+shell_is_linux() { [ "$(uname)" = "Linux" ]; }
+tmux_icon() {
+	case "$1" in battery_full|battery_med|battery_empty) echo "BAT" ;;
+		battery_charge) echo "CHG" ;; adapter) echo "AC" ;; esac
+}
+seg_log() { :; }
+source "$(dirname "$0")/../common.sh" 2>/dev/null
 
 BATTERY_FULL="$(tmux_icon battery_full)"
 BATTERY_MED="$(tmux_icon battery_med)"

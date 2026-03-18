@@ -3,7 +3,9 @@
 # Output: raw tmux format string (colors + separator).
 
 # shellcheck disable=SC1091
-source "$(dirname "$0")/../common.sh" || exit 1
+tmux_icon() { case "$1" in session) echo "#" ;; esac; }
+SEP_RIGHT_BOLD="" SEP_RIGHT_THIN="" SEP_LEFT_BOLD="" SEP_LEFT_THIN=""
+source "$(dirname "$0")/../common.sh" 2>/dev/null
 
 prefix_pressed=$(tmux display-message -p '#{client_prefix}' 2>/dev/null || true)
 icon=$(tmux_icon session)
