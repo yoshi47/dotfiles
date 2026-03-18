@@ -12,7 +12,10 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-export PATH="$HOME/bin:$PATH"
+case ":$PATH:" in
+  *":$HOME/bin:"*) ;;
+  *) export PATH="$HOME/bin:$PATH" ;;
+esac
 
 # Nix: also in .zprofile for login shells; needed here for non-login shells
 # (Claude Code, VS Code terminal, etc.) that don't source .zprofile
@@ -152,14 +155,28 @@ _ZSHRC_LOADED=1
 alias claude-mem='bun "$HOME/.claude/plugins/cache/thedotmack/claude-mem/10.5.2/scripts/worker-service.cjs"'
 
 # Added by Antigravity
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+case ":$PATH:" in
+  *":$HOME/.antigravity/antigravity/bin:"*) ;;
+  *) export PATH="$HOME/.antigravity/antigravity/bin:$PATH" ;;
+esac
 
-# Added by git-ai installer on Fri Mar 13 15:25:30 JST 2026
-export PATH="$HOME/.git-ai/bin:$PATH"
+# Added by git-ai installer
+case ":$PATH:" in
+  *":$HOME/.git-ai/bin:"*) ;;
+  *) export PATH="$HOME/.git-ai/bin:$PATH" ;;
+esac
 
 # LiteLLM Proxy (Claude Code with OpenAI models)
 alias claude-gpt='~/.config/litellm/start.sh'
 
 # Added by sonarqube-cli installer
-export PATH="$HOME/.local/share/sonarqube-cli/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+case ":$PATH:" in
+  *":$HOME/.local/share/sonarqube-cli/bin:"*) ;;
+  *) export PATH="$HOME/.local/share/sonarqube-cli/bin:$PATH" ;;
+esac
+
+# User-local scripts
+case ":$PATH:" in
+  *":$HOME/.local/bin:"*) ;;
+  *) export PATH="$HOME/.local/bin:$PATH" ;;
+esac
