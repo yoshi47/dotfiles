@@ -278,18 +278,18 @@ config.keys = {
           end
         end
 
-        -- SSH hosts
-        local hosts = parse_ssh_hosts()
-        for _, host in ipairs(hosts) do
-          add(pad(host, NAME_W) .. pad("", 10) .. "[ssh]", "ssh:" .. host)
-        end
-
         -- OrbStack VMs
         local vms = list_orb_vms()
         local orb_users = {}
         for _, vm in ipairs(vms) do
           orb_users[vm.name] = vm.user
           add(pad(vm.name, NAME_W) .. pad("", 10) .. "[orb]", "orb:" .. vm.name)
+        end
+
+        -- SSH hosts
+        local hosts = parse_ssh_hosts()
+        for _, host in ipairs(hosts) do
+          add(pad(host, NAME_W) .. pad("", 10) .. "[ssh]", "ssh:" .. host)
         end
 
         -- Docker containers (lazy — opens sub-picker to avoid blocking)
