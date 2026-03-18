@@ -2,9 +2,8 @@
 # Display session icon with powerline-style background.
 # Output: raw tmux format string (colors + separator).
 
-SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck disable=SC1091
-source "$SCRIPTS_DIR/common.sh" || exit 1
+source "$(dirname "$0")/../common.sh" || exit 1
 
 prefix_pressed=$(tmux display-message -p '#{client_prefix}' 2>/dev/null || true)
 icon=$(tmux_icon session)

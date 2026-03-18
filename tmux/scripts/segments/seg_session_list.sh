@@ -2,9 +2,8 @@
 # Display tmux session list (window-list style) with clickable ranges.
 # Output: raw tmux format string.
 
-SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck disable=SC1091
-source "$SCRIPTS_DIR/common.sh" || exit 1
+source "$(dirname "$0")/../common.sh" || exit 1
 
 current_session=$(tmux display-message -p '#S')
 

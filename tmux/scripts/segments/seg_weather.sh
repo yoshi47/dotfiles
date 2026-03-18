@@ -2,9 +2,8 @@
 # Weather segment: Open-Meteo API with Nerd Font icons + cache.
 # Outputs plain text (icon + temp) like other segments. Silent on failure.
 
-SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck disable=SC1091
-source "$SCRIPTS_DIR/common.sh" || exit 1
+source "$(dirname "$0")/../common.sh" || exit 1
 
 CACHE_FILE="/tmp/tmux-weather.cache"
 COORDS_CACHE="/tmp/tmux-weather-coords.cache"

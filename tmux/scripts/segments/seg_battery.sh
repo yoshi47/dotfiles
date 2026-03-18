@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 # Print battery status as percentage (plain text).
 
-SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck disable=SC1091
-source "$SCRIPTS_DIR/common.sh" || exit 1
+source "$(dirname "$0")/../common.sh" || exit 1
 
 BATTERY_FULL="$(tmux_icon battery_full)"
 BATTERY_MED="$(tmux_icon battery_med)"
