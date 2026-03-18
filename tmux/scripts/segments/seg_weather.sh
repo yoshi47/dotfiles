@@ -79,6 +79,12 @@ read_cache() {
 	echo "$temp"
 }
 
+emit_from_cache() {
+	local cached
+	cached=$(read_cache) || return 1
+	emit_weather "$(echo "$cached" | head -1)" "$(echo "$cached" | tail -1)"
+}
+
 cache_age() {
 	[ -f "$CACHE_FILE" ] || return 1
 	echo $(( $(date +%s) - $(stat -f %m "$CACHE_FILE" 2>/dev/null || stat -c %Y "$CACHE_FILE" 2>/dev/null || echo 0) ))
@@ -87,12 +93,8 @@ cache_age() {
 # Fresh cache → use it
 age=$(cache_age)
 if [ -n "$age" ] && [ "$age" -lt "$CACHE_TTL" ]; then
-	cached=$(read_cache)
-	if [ -n "$cached" ]; then
+	if emit_from_cache; then
 		seg_log info "cache hit (age=${age}s)"
-		code=$(echo "$cached" | head -1)
-		temp=$(echo "$cached" | tail -1)
-		emit_weather "$code" "$temp"
 		exit 0
 	fi
 fi
@@ -100,12 +102,8 @@ fi
 # Cache miss or stale → fetch
 if ! resolve_coords; then
 	# Geocoding failed — try stale cache
-	cached=$(read_cache)
-	if [ -n "$cached" ]; then
+	if emit_from_cache; then
 		seg_log warn "geocoding failed, using stale cache"
-		code=$(echo "$cached" | head -1)
-		temp=$(echo "$cached" | tail -1)
-		emit_weather "$code" "$temp"
 		exit 0
 	fi
 	seg_log warn "geocoding failed, no cache — fallback"
@@ -127,13 +125,8 @@ if [ -n "$weather_code" ] && [ -n "$temp_raw" ]; then
 fi
 
 # Fetch failed — stale-while-error
-seg_log warn "fetch failed"
-cached=$(read_cache)
-if [ -n "$cached" ]; then
-	seg_log warn "using stale cache"
-	code=$(echo "$cached" | head -1)
-	temp=$(echo "$cached" | tail -1)
-	emit_weather "$code" "$temp"
+if emit_from_cache; then
+	seg_log warn "fetch failed, using stale cache"
 	exit 0
 fi
 

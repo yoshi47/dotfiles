@@ -218,7 +218,7 @@
           },
           {
             "type": "command",
-            "command": "~/.config/tmux/scripts/window/tmux-app-alert.sh set"
+            "command": "~/.config/tmux/scripts/window/tmux-app-flag.sh alert set"
           }
         ]
       }
@@ -229,7 +229,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.config/tmux/scripts/window/tmux-app-alert.sh clear || true"
+            "command": "~/.config/tmux/scripts/window/tmux-app-flag.sh alert clear || true"
           }
         ]
       },
@@ -297,7 +297,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.config/tmux/scripts/window/tmux-app-waiting.sh clear"
+            "command": "~/.config/tmux/scripts/window/tmux-app-flag.sh waiting clear"
           }
         ]
       },
@@ -340,7 +340,7 @@
           },
           {
             "type": "command",
-            "command": "~/.claude/hooks/stop_main_only.sh ~/.config/tmux/scripts/window/tmux-app-waiting.sh set"
+            "command": "~/.claude/hooks/stop_main_only.sh ~/.config/tmux/scripts/window/tmux-app-flag.sh waiting set"
           }
         ]
       }
